@@ -31,7 +31,9 @@ class Application
 	public function run()
 	{
 		$config = $this->getConfig();
-		Db\Db::setDsn($config->get('dsn'));
+		if ($dsn = $config->get('dsn')) {
+			Db\Db::setDsn($dsn);
+		}
 		(new Controller\Dispatcher(new Controller\Request(), $config))->run();
 	}
 
