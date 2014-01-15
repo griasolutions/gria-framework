@@ -1,0 +1,21 @@
+{
+	"name": "griasolutions/gria-lib",
+	"require": {
+		"php": ">=5.4.0",
+		"austinhyde/iniparser": "@dev",
+		"icanboogie/inflector": "dev-master"
+	},
+	"require-dev": {
+		"phpmd/phpmd": "1.4.*",
+		"phpunit/phpunit": ">=3.7",
+		"phpunit/phpunit-selenium": ">=1.2",
+		"squizlabs/php_codesniffer": "1.*"
+	},
+	"prefer-stable": true,
+	"autoload": {
+		"psr-0": {
+			"Gria\\": "src/library/",
+			"GriaTest\\": "tests/php/"
+		}
+	}
+}
