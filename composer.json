@@ -14,8 +14,8 @@
 	"prefer-stable": true,
 	"autoload": {
 		"psr-0": {
-			"Gria\\": "src/library/",
-			"GriaTest\\": "tests/php/"
+			"Gria\\": "library/",
+			"GriaTest\\": "tests/"
 		}
 	}
 }
