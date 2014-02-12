@@ -9,7 +9,7 @@
 namespace Gria\Helper;
 
 
-class HelperAbstract
+interface HelperInterface
 {
 
-} 
+}

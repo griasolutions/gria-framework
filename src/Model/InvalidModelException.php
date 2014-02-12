@@ -1,14 +1,14 @@
 <?php
 /**
- * This file is part of the Gria library.
+ * This file is part of the Gria Framework package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Gria\Controller;
+namespace Gria\Model;
 
-class InvalidControllerException extends \Exception
+class InvalidModelException extends \Exception
 {
 
 	/**
@@ -16,7 +16,7 @@ class InvalidControllerException extends \Exception
 	 */
 	public function __construct($message = "", $code = 0, \Exception $previous = null)
 	{
-		parent::__construct($message, 404, $previous);
+		parent::__construct($message, 500, $previous);
 	}
 
 } 

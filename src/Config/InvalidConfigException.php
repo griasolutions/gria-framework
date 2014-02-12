@@ -8,7 +8,6 @@
 
 namespace Gria\Config;
 
-
 class InvalidConfigException
 {
 

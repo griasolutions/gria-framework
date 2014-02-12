@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Gria library.
+ * This file is part of the Gria Framework package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,7 +15,7 @@ class Config
 	private $_path;
 
 	/** @var array */
-	private $_data = array();
+	private $_data = [];
 
 	/**
 	 * @param string $path
@@ -23,7 +23,7 @@ class Config
 	 */
 	public function __construct($path = '')
 	{
-		if ($path) {
+        if ($path) {
 			$this->setPath(realpath($path));
 		}
 	}
@@ -36,7 +36,7 @@ class Config
 		if (!$this->_data) {
 			$data = (new \IniParser($this->getPath()))->parse();
 			foreach ($data as $environment => $settings) {
-				if (APPLICATION_ENV == trim($environment)) {
+				if (GRIA_ENV == trim($environment)) {
 					$this->_data = $settings;
 					break;
 				}

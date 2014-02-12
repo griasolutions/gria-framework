@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Gria library.
+ * This file is part of the Gria Framework package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,7 +22,8 @@ class Application
 	 */
 	public function __construct($path)
 	{
-		$this->setConfig(new Config\Config($path));
+        $this->_checkEnvironment();
+        $this->setConfig(new Config\Config($path));
 	}
 
 	/**
@@ -37,4 +38,14 @@ class Application
 		(new Controller\Dispatcher(new Controller\Request(), $config))->run();
 	}
 
-} 
+    /**
+     * @throws InvalidEnvironmentException
+     */
+    private function _checkEnvironment()
+    {
+        if (!defined('GRIA_ENV')) {
+            throw new InvalidEnvironmentException('No environment defined.');
+        }
+    }
+
+}

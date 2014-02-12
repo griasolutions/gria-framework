@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Gria library.
+ * This file is part of the Gria Framework package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -49,5 +49,11 @@ interface ControllerInterface
 	 * @return \Gria\Controller\Response
 	 */
 	public function getResponse();
+
+    /**
+     * @param string $key
+     * @return \Gria\Helper\HelperInterface
+     */
+	public function getHelper($key);
 
 }

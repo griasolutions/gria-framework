@@ -8,8 +8,10 @@
 
 namespace Gria\Helper;
 
+use \Gria\Controller;
 
-interface HelperInterface
+class HelperAbstract implements HelperInterface
 {
+
 
 } 
