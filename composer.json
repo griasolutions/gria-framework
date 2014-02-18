@@ -14,9 +14,16 @@
 	},
 	"prefer-stable": true,
 	"autoload": {
+<<<<<<< HEAD
         "psr-4": {
             "Gria\\": "src/",
             "GriaTest\\": "tests/",
         }
+=======
+		"psr-0": {
+			"Gria\\": "library/",
+			"GriaTest\\": "tests/"
+		}
+>>>>>>> ab88fb5d29bf01fd47dcb5f5ce687f541fc86b9f
 	}
 }
