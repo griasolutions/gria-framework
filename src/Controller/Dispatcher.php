@@ -9,24 +9,24 @@
 namespace Gria\Controller;
 
 use \Gria\Config;
+use \Gria\Helper;
 
 class Dispatcher
 {
 
-	use RequestAwareTrait, Config\ConfigAwareTrait;
+	use RequestAwareTrait, Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;
 
-	/** @var \Gria\Controller\Controller */
-	private $_controller;
-
-	/**
-	 * @param \Gria\Controller\Request $request
-	 * @param \Gria\Config\Config $config
-	 */
-	public function __construct(Request $request, Config\Config $config)
+    /**
+     * @param \Gria\Controller\Request $request
+     * @param \Gria\Config\ConfigInterface $config
+     * @param \Gria\Helper\Manager $helperManager
+     */
+	public function __construct(Request $request, Config\ConfigInterface $config, Helper\Manager $helperManager)
 	{
 		$this->setRequest($request);
 		$this->setConfig($config);
-	}
+        $this->setHelperManager($helperManager);
+    }
 
 	/**
 	 * @return void
@@ -34,44 +34,46 @@ class Dispatcher
 	public function run()
 	{
 		try {
-			$controller = $this->getController();
-			$controller->route();
-			$controller->render();
-			$controller->respond();
+			$desiredControllerName = $this->getRequest()->getControllerName();
+            $this->_dispatch($desiredControllerName);
 		} catch (\Exception $ex) {
-			$className = '\Gria\Controller\ErrorController';
-			$applicationClassName = '\Application\Controller\Error';
-			if (class_exists($applicationClassName)) {
-				$className = $applicationClassName;
-			}
-			$this->_controller = (new \ReflectionClass($className))
-				->newInstance($this->getRequest(), $this->getConfig())
-				->setException($ex);
-			$this->run();
+            try {
+                $this->_dispatch('error', $ex);
+            } catch (\Exception $newEx) {
+                die('<div>' . $newEx->getMessage() . '!</div>');
+            }
 		}
 	}
 
-	/**
-	 * @throws \Gria\Controller\InvalidControllerException
-	 * @return \Gria\Controller\Controller
-	 */
-	public function getController()
-	{
-		if (!$this->_controller) {
-			$config = $this->getConfig();
-			$request = $this->getRequest();
-			$controllerName = $request->getControllerName();
-			$controllerClassName = '\Application\Controller\\' . ucfirst($controllerName);
-			try {
-				$reflectionClass = new \ReflectionClass($controllerClassName);
-				$controller = $reflectionClass->newInstance($request, $config);
-				$this->_controller = $controller;
-			} catch (\ReflectionException $ex) {
-				throw new InvalidControllerException(sprintf('%s is not a valid controller', $controllerClassName));
-			}
-		}
+    /**
+     * @return \Gria\Controller\AbstractFactory
+     */
+    public function getAbstractFactory()
+    {
+        return new AbstractFactory($this->getRequest(), $this->getConfig(), $this->getHelperManager());
+    }
 
-		return $this->_controller;
-	}
+    /**
+     * @param string $controllerName
+     * @param \Exception $exception
+     * @throws InvalidControllerException
+     */
+    private function _dispatch($controllerName, \Exception $exception = null)
+    {
+        if (!$controller = $this->getAbstractFactory()->get($controllerName)) {
+            if ($controllerName == 'error') {
+                $errorMessage = 'Please define an error controller and view for your application';
+            } else {
+                $errorMessage = sprintf('%s is an invalid controller', $controllerName);
+            }
+            throw new InvalidControllerException($errorMessage);
+        }
+        if (method_exists($controller, 'setException')) {
+            $controller->setException($exception);
+        }
+        $controller->route();
+        $controller->render();
+        $controller->respond();
+    }
 
 }

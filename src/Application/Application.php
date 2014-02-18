@@ -10,20 +10,25 @@ namespace Gria\Application;
 
 use \Gria\Config;
 use \Gria\Controller;
-use \Gria\Db;
+use \Gria\Helper;
 
 class Application
 {
 
-	use Config\ConfigAwareTrait;
+	use Config\ConfigAwareTrait, Controller\RequestAwareTrait, Helper\HelperManagerAwareTrait;
 
-	/**
-	 * @param string $path
-	 */
-	public function __construct($path)
+    /** @var \Gria\Controller\Dispatcher */
+    private $_controllerDispatcher;
+
+    /**
+     * @param \Gria\Config\ConfigInterface $config
+     */
+	public function __construct(Config\ConfigInterface $config)
 	{
         $this->_checkEnvironment();
-        $this->setConfig(new Config\Config($path));
+        $this->setConfig($config)
+            ->setRequest(new Controller\Request($config))
+            ->setHelperManager(new Helper\Manager($config));
 	}
 
 	/**
@@ -31,21 +36,30 @@ class Application
 	 */
 	public function run()
 	{
-		$config = $this->getConfig();
-		if ($dsn = $config->get('dsn')) {
-			Db\Db::setDsn($dsn);
-		}
-		(new Controller\Dispatcher(new Controller\Request(), $config))->run();
+		$this->getControllerDispatcher()->run();
 	}
 
     /**
-     * @throws InvalidEnvironmentException
+     * @return \Gria\Controller\Dispatcher
+     */
+    public function getControllerDispatcher()
+    {
+        if (!$this->_controllerDispatcher) {
+            $this->_controllerDispatcher = new Controller\Dispatcher(
+                $this->getRequest(),
+                $this->getConfig(),
+                $this->getHelperManager()
+            );
+        }
+        return $this->_controllerDispatcher;
+    }
+
+    /**
+     * @return void
      */
     private function _checkEnvironment()
     {
-        if (!defined('GRIA_ENV')) {
-            throw new InvalidEnvironmentException('No environment defined.');
-        }
+        defined('GRIA_ENV') or die('No application environment defined!');
     }
 
 }

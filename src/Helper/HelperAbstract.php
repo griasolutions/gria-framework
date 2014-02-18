@@ -1,17 +1,38 @@
 <?php
 /**
- * Created by IntelliJ IDEA.
- * User: gfisher
- * Date: 1/7/14
- * Time: 4:12 PM
+ * This file is part of the Gria Framework package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Gria\Helper;
 
-use \Gria\Controller;
+use \Gria\Config;
 
 class HelperAbstract implements HelperInterface
 {
 
+    use Config\ConfigAwareTrait;
+
+    /** @var string */
+    private $_name;
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct(Config\ConfigInterface $config)
+    {
+        $this->_name = get_class($this);
+        $this->setConfig($config);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
 
 } 

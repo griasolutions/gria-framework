@@ -4,19 +4,19 @@
 		"php": ">=5.4.0",
 		"austinhyde/iniparser": "@dev",
 		"icanboogie/inflector": "dev-master",
-        "doctrine/orm": "2.4.*",
         "symfony/yaml": "2.*"
 	},
 	"require-dev": {
 		"phpmd/phpmd": "1.4.*",
 		"phpunit/phpunit": ">=3.7",
-		"squizlabs/php_codesniffer": "1.*"
+		"squizlabs/php_codesniffer": "1.*",
+        "phpdocumentor/phpdocumentor": "2.*"
 	},
 	"prefer-stable": true,
 	"autoload": {
         "psr-4": {
             "Gria\\": "src/",
-            "GriaTest\\": "tests/src/"
+            "GriaTest\\": "tests/",
         }
 	}
 }

@@ -8,7 +8,9 @@
 
 namespace Gria\Controller;
 
-class InvalidControllerException extends \Exception
+use \Gria\Common;
+
+class InvalidControllerException extends Common\Exception
 {
 
 	/**

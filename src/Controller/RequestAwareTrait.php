@@ -11,23 +11,21 @@ namespace Gria\Controller;
 trait RequestAwareTrait
 {
 
-	/** @var \Gria\Controller\Request */
+	/** @var \Gria\Controller\RequestInterface */
 	private $_request;
 
-	/**
-	 * @param \Gria\Controller\Request $request
-	 *
-	 * @return $this
-	 */
-	public function setRequest(Request $request)
+    /**
+     * @param \Gria\Controller\RequestInterface $request
+     * @return $this
+     */
+    public function setRequest(RequestInterface $request)
 	{
 		$this->_request = $request;
-
 		return $this;
 	}
 
 	/**
-	 * @return \Gria\Controller\Request
+	 * @return \Gria\Controller\RequestInterface
 	 */
 	public function getRequest()
 	{

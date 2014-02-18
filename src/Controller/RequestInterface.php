@@ -6,21 +6,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Helper;
+namespace Gria\Controller;
 
-use \Gria\Config;
+use \Gria\Http;
 
-interface HelperInterface
+interface RequestInterface extends Http\RequestInterface
 {
-
-    /**
-     * @param \Gria\Config\ConfigInterface $config
-     */
-    public function __construct(Config\ConfigInterface $config);
 
     /**
      * @return string
      */
-    public function getName();
+    public function getControllerName();
 
-}
+    /**
+     * @return string
+     */
+    public function getActionName();
+
+} 

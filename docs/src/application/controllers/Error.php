@@ -6,10 +6,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Model;
+namespace Application\Controller;
 
-use \Gria\Common;
+use \Gria\Controller;
 
-class InvalidModelException extends Common\Exception
+class Error extends Controller\ErrorController
 {
-} 
+}

@@ -10,27 +10,30 @@ namespace Gria\Controller;
 
 use \Gria\View;
 use \Gria\Config;
+use \Gria\Helper;
+use \Gria\Http;
 
 class Controller implements ControllerInterface
 {
 
-	use RequestAwareTrait, Config\ConfigAwareTrait;
+	use RequestAwareTrait, Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;
 
 	/** @var \Gria\View\View */
 	private $_view;
 
-	/** @var \Gria\Controller\Response */
+	/** @var \Gria\Http\ResponseInterface */
 	private $_response;
 
 	/**
 	 * @inheritdoc
 	 */
-	public function __construct(Request $request, Config\Config $config)
+	public function __construct(RequestInterface $request, Config\ConfigInterface $config, Helper\Manager $helperManager)
 	{
 		$this->setRequest($request);
 		$this->setConfig($config);
-		$this->_response = new Response();
-		$this->_view = new View\View($this->getRequest(), $this->getConfig());
+        $this->setHelperManager($helperManager);
+		$this->_response = new Http\Response();
+		$this->_view = new View\View($this->getConfig());
 		$this->init();
 	}
 
@@ -80,6 +83,14 @@ class Controller implements ControllerInterface
 		$this->getResponse()->send();
 	}
 
+    /**
+     * @inheritdoc
+     */
+    public function getHelper($key)
+    {
+        return $this->getHelperManager()->get($key);
+    }
+
 	/**
 	 * @inheritdoc
 	 */
@@ -96,4 +107,4 @@ class Controller implements ControllerInterface
 		return $this->_response;
 	}
 
-} 
+}

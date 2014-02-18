@@ -8,7 +8,7 @@
 
 namespace Gria\Config;
 
-class Config
+class Config implements ConfigInterface
 {
 
 	/** @var string */
@@ -17,11 +17,10 @@ class Config
 	/** @var array */
 	private $_data = [];
 
-	/**
-	 * @param string $path
-	 * @return \Gria\Config\Config
-	 */
-	public function __construct($path = '')
+    /**
+     * @param string $path
+     */
+    public function __construct($path = '')
 	{
         if ($path) {
 			$this->setPath(realpath($path));

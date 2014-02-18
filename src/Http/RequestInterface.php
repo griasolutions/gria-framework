@@ -6,21 +6,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Helper;
+namespace Gria\Http;
 
-use \Gria\Config;
-
-interface HelperInterface
+interface RequestInterface
 {
-
-    /**
-     * @param \Gria\Config\ConfigInterface $config
-     */
-    public function __construct(Config\ConfigInterface $config);
 
     /**
      * @return string
      */
-    public function getName();
+    public function getHost();
+
+    /**
+     * @return string
+     */
+    public function getUri();
+
+    /**
+     * @return string
+     */
+    public function getUrl();
 
 }

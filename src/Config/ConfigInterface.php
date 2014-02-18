@@ -6,10 +6,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Model;
+namespace Gria\Config;
 
-use \Gria\Common;
-
-class InvalidModelException extends Common\Exception
+interface ConfigInterface
 {
 } 

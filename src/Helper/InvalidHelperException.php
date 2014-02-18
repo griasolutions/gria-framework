@@ -6,10 +6,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Model;
+namespace Gria\Helper;
 
 use \Gria\Common;
 
-class InvalidModelException extends Common\Exception
+class InvalidHelperException extends Common\Exception
 {
 } 

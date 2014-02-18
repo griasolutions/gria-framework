@@ -6,10 +6,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Model;
+namespace Gria\Common;
 
-use \Gria\Common;
-
-class InvalidModelException extends Common\Exception
+interface AbstractFactoryInterface
 {
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function get($name);
+
 } 

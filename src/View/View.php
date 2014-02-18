@@ -11,12 +11,14 @@ namespace Gria\View;
 use \Gria\Controller;
 use \Gria\Config;
 
-class View
+class View implements ViewInterface
 {
 
-	use Controller\RequestAwareTrait, Config\ConfigAwareTrait;
+	use Config\ConfigAwareTrait;
 
-	const VIEW_BASE_PATH = 'src/application/templates';
+	const VIEW_BASE_PATH = 'src/application/views';
+
+    const VIEW_FILE_EXTENSION = 'phtml';
 
 	/** @var string */
 	private $_sourcePath;
@@ -25,54 +27,40 @@ class View
 	private $_settings = array();
 
 	/**
-	 * @param \Gria\Controller\Request $request
-	 * @param \Gria\Config\Config $config
+	 * @param \Gria\Config\ConfigInterface $config
 	 */
-	public function __construct(Controller\Request $request, Config\Config $config)
+	public function __construct(Config\ConfigInterface $config)
 	{
-		$this->setRequest($request);
 		$this->setConfig($config);
-		$this->init();
 	}
 
 	/**
-	 * @return void
-	 */
-	public function init()
-	{
-		$this->set('controllerName', $this->getRequest()->getControllerName());
-		$this->set('actionName', $this->getRequest()->getActionName());
-	}
-
-	/**
-	 * @param string $sourcePath
+	 * @inheritdoc
 	 */
 	public function setSourcePath($sourcePath)
 	{
 		$this->_sourcePath = $sourcePath;
 	}
 
-	/**
-	 * @return string
-	 */
+    /**
+     * @inheritdoc
+     */
 	public function getSourcePath()
 	{
 		return $this->_sourcePath;
 	}
 
-	/**
-	 * @param string $key
-	 * @param string $value
-	 */
+    /**
+     * @inheritdoc
+     */
 	public function set($key, $value)
 	{
 		$this->_settings[$key] = $value;
 	}
 
-	/**
-	 * @param string $key
-	 * @return mixed
-	 */
+    /**
+     * @inheritdoc
+     */
 	public function get($key)
 	{
 		if (array_key_exists($key, $this->_settings)) {
@@ -80,18 +68,17 @@ class View
 		}
 	}
 
-	/**
-	 * @return string
-	 */
+    /**
+     * @inheritdoc
+     */
 	public function render()
 	{
-		return $this->_renderTemplate('views/' . $this->getSourcePath());
+		return $this->_renderTemplate('layouts/' . $this->getSourcePath());
 	}
 
-	/**
-	 * @param string $partial
-	 * @return string
-	 */
+    /**
+     * @inheritdoc
+     */
 	public function renderPartial($partial)
 	{
 		return $this->_renderTemplate('partials/' . $partial);
@@ -99,17 +86,20 @@ class View
 
 	/**
 	 * @param string $templateName
-	 * @throws \Gria\View\InvalidTemplateException
+	 * @throws \Gria\View\InvalidViewException
 	 * @return string
 	 */
 	private function _renderTemplate($templateName)
 	{
-		ob_start();
-		@include self::VIEW_BASE_PATH . '/' . $templateName . '.phtml';
-		if (!$output = ob_get_clean()) {
-			throw new InvalidTemplateException(sprintf('%s is not a valid template', $templateName));
+		$path = GRIA_PATH . '/' . static::VIEW_BASE_PATH . '/' . $templateName . '.'
+            . static::VIEW_FILE_EXTENSION;
+		if (!file_exists($path)) {
+            $errorMessage = sprintf('%s is not a valid template', $path);
+            throw new InvalidViewException($errorMessage);
 		}
-
+        ob_start();
+        include $path;
+        $output = ob_get_clean();
 		return $output;
 	}
 

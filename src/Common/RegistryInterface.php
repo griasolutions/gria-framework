@@ -6,10 +6,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Model;
+namespace Gria\Common;
 
-use \Gria\Common;
-
-class InvalidModelException extends Common\Exception
+interface RegistryInterface extends \ArrayAccess
 {
+
+    /**
+     * @param mixed $offset
+     * @return mixed
+     */
+    public function encodeOffset($offset);
+
 } 

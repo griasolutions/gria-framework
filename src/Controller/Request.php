@@ -8,8 +8,12 @@
 
 namespace Gria\Controller;
 
-class Request
+use \Gria\Config;
+
+class Request implements RequestInterface
 {
+
+    use Config\ConfigAwareTrait;
 
 	/** @var string */
 	private $_host;
@@ -18,7 +22,7 @@ class Request
 	private $_uri;
 
 	/** @var array */
-	private $_uriSegments = array();
+	private $_uriSegments = [];
 
 	/** @var string */
 	private $_url;
@@ -29,6 +33,14 @@ class Request
 	/** @var string */
 	private $_actionName;
 
+    /**
+     * @param Config\ConfigInterface $config
+     */
+    public function __construct(Config\ConfigInterface $config)
+    {
+        $this->setConfig($config);
+    }
+
 	/**
 	 * @return string
 	 */
@@ -38,7 +50,7 @@ class Request
 	}
 
 	/**
-	 * @return string
+	 * @inheritdoc
 	 */
 	public function getHost()
 	{
@@ -50,7 +62,7 @@ class Request
 	}
 
 	/**
-	 * @return string
+	 * @inheritdoc
 	 */
 	public function getUri()
 	{
@@ -62,7 +74,7 @@ class Request
 	}
 
 	/**
-	 * @return string
+	 * @inheritdoc
 	 */
 	public function getUrl()
 	{
@@ -73,41 +85,48 @@ class Request
 		return $this->_url;
 	}
 
-	/**
-	 * @return string
-	 */
+    /**
+     * @inheritdoc
+     */
 	public function getControllerName()
 	{
 		if (!$this->_controllerName) {
 			$uriSegments = $this->_getUriSegments();
-			if (!isset($uriSegments[0])) {
-				$this->_controllerName = 'dashboard';
+            if (!isset($uriSegments[0]) || $uriSegments[0] == '') {
+                $routes = $this->getConfig()->get('routes');
+                $defaultController = isset($routes['defaultController']) ? $routes['defaultController'] : 'index';
+                $this->_controllerName = $defaultController;
 			} else {
-				switch ($uriSegments[0]) {
-					case '':
-					case 'dashboard':
-						$this->_controllerName = 'dashboard';
-						break;
-					default:
-						$this->_controllerName = strtolower($uriSegments[0]);
-						break;
-				}
+				$this->_controllerName = strtolower($uriSegments[0]);
 			}
 		}
 
 		return $this->_controllerName;
 	}
 
+    /**
+     * @inheritdoc
+     */
 	public function getActionName()
 	{
 		if (!$this->_actionName) {
 			$uriSegments = $this->_getUriSegments();
-			$this->_actionName = isset($uriSegments[1]) ? strtolower($uriSegments[1]) : 'index';
+            if (!isset($uriSegments[1]) || $uriSegments[1] == '') {
+                $routes = $this->getConfig()->get('routes');
+                $defaultAction = isset($routes['defaultAction']) ? $routes['defaultAction'] : 'index';
+                $this->_actionName = $defaultAction;
+            } else {
+                $this->_actionName = strtolower($uriSegments[1]);
+            }
+
 		}
 
 		return $this->_actionName;
 	}
 
+    /**
+     * @return array
+     */
 	private function _getUriSegments()
 	{
 		if (!$this->_uriSegments) {

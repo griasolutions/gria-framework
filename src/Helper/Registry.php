@@ -6,10 +6,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Model;
+namespace Gria\Helper;
 
 use \Gria\Common;
 
-class InvalidModelException extends Common\Exception
+class Registry extends Common\Registry
 {
-} 
+
+    /**
+     * @inheritdoc
+     */
+    public function encodeOffset($offset)
+    {
+        return strtolower($offset);
+    }
+
+}
