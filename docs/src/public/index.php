@@ -13,10 +13,10 @@ define('GRIA_PATH', dirname(dirname(dirname(__FILE__))));
 set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
     GRIA_PATH,
-    dirname(dirname(GRIA_PATH))
+    dirname(GRIA_PATH)
 )));
 
-// pull in composer dependencies
+// pull in composer dependencies from the framework
 require 'vendor/autoload.php';
 
 // run the application

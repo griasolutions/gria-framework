@@ -14,7 +14,27 @@ interface RequestInterface
     /**
      * @return string
      */
+    public function getUrl();
+
+    /**
+     * @return string
+     */
     public function getHost();
+
+    /**
+     * @return string
+     */
+    public function getPort();
+
+    /**
+     * @return string
+     */
+    public function getUsername();
+
+    /**
+     * @return string
+     */
+    public function getPassword();
 
     /**
      * @return string
@@ -22,8 +42,18 @@ interface RequestInterface
     public function getUri();
 
     /**
+     * @return array
+     */
+    public function getUriSegments();
+
+    /**
      * @return string
      */
-    public function getUrl();
+    public function getQuery();
+
+    /**
+     * @return string
+     */
+    public function getFragment();
 
 }

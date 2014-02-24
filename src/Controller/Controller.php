@@ -16,9 +16,12 @@ use \Gria\Http;
 class Controller implements ControllerInterface
 {
 
-	use RequestAwareTrait, Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;
+	use Http\RequestAwareTrait, Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;
 
-	/** @var \Gria\View\View */
+	/** @var string */
+    private $_name;
+
+    /** @var \Gria\View\View */
 	private $_view;
 
 	/** @var \Gria\Http\ResponseInterface */
@@ -27,8 +30,9 @@ class Controller implements ControllerInterface
 	/**
 	 * @inheritdoc
 	 */
-	public function __construct(RequestInterface $request, Config\ConfigInterface $config, Helper\Manager $helperManager)
+	public function __construct(Http\RequestInterface $request, Config\ConfigInterface $config, Helper\Manager $helperManager)
 	{
+	    $this->_name = strtolower(get_class($this));
 		$this->setRequest($request);
 		$this->setConfig($config);
         $this->setHelperManager($helperManager);
@@ -36,6 +40,14 @@ class Controller implements ControllerInterface
 		$this->_view = new View\View($this->getConfig());
 		$this->init();
 	}
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
 
 	/**
 	 * @inheritdoc
@@ -47,11 +59,11 @@ class Controller implements ControllerInterface
 	/**
 	 * @inheritdoc
 	 */
-	public function route()
+	public function dispatch($action)
 	{
-		$actionMethodName = $this->getRequest()->getActionName() . 'Action';
+        $actionMethodName = $action . 'Action';
 		if (!method_exists($this, $actionMethodName)) {
-			throw new InvalidActionException(sprintf('%s is not a valid action', $actionMethodName));
+			throw new InvalidActionException(sprintf('%s is not a valid action', $action));
 		}
 		$this->$actionMethodName();
 	}

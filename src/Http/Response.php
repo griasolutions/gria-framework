@@ -50,6 +50,7 @@ class Response implements ResponseInterface
 		if (array_key_exists($statusCode, static::$_statusCodes)) {
 			$this->addHeader('HTTP/1.0 ' . $statusCode . ' ' . static::$_statusCodes[$statusCode]);
 		}
+        return $this;
 	}
 
     /**
@@ -58,6 +59,7 @@ class Response implements ResponseInterface
 	public function setContentType($contentType)
 	{
 		$this->addHeader('Content-Type: ' . $contentType);
+        return $this;
 	}
 
     /**
@@ -66,6 +68,7 @@ class Response implements ResponseInterface
 	public function setBody($body)
 	{
 		$this->_body = $body;
+        return $this;
 	}
 
     /**

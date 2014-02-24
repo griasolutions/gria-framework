@@ -23,16 +23,19 @@ interface ResponseInterface
 
     /**
      * @param string $statusCode
+     * @return \Gria\Http\ResponseInterface
      */
     public function setStatusCode($statusCode);
 
     /**
      * @param string $contentType
+     * @return \Gria\Http\ResponseInterface
      */
     public function setContentType($contentType);
 
     /**
      * @param string $body
+     * @return \Gria\Http\ResponseInterface
      */
     public function setBody($body);
 

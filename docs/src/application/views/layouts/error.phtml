@@ -1,10 +1,13 @@
 <?php echo $this->renderPartial('header'); ?>
 
-
-
-
-    <!-- Add your site or application content here -->
-    <p>An error occurred: <?php echo $this->get('exception')->getMessage(); ?></p>
+<h1>Error</h1>
+<p>Look at the mess you made! Somehow something went wrong.</p>
+<h2>The problem</h2>
+<p><?php echo $this->get('exception')->getMessage(); ?></p>
+<?php //if (GRIA_ENV == 'dev') : ?>
+<h2>Trace</h2>
+<p><?php echo $this->get('exception')->getTraceAsString(); ?></p>
+<?php //endif; ?>
 
 <?php echo $this->renderPartial('footer'); ?>
 

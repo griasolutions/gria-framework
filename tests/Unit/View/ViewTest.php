@@ -9,10 +9,6 @@ use \GriaTest\Unit\Controller;
 class ViewTest extends \PHPUnit_Framework_TestCase
 {
 
-	use Controller\ControllerTestAbstract {
-		setUp as requestTraitSetup;
-	}
-
 	private $_view;
 
 	public function setUp()

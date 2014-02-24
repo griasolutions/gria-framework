@@ -9,13 +9,14 @@
 namespace Gria\Application;
 
 use \Gria\Config;
+use \Gria\Http;
 use \Gria\Controller;
 use \Gria\Helper;
 
 class Application
 {
 
-	use Config\ConfigAwareTrait, Controller\RequestAwareTrait, Helper\HelperManagerAwareTrait;
+	use Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;
 
     /** @var \Gria\Controller\Dispatcher */
     private $_controllerDispatcher;
@@ -25,10 +26,8 @@ class Application
      */
 	public function __construct(Config\ConfigInterface $config)
 	{
-        $this->_checkEnvironment();
-        $this->setConfig($config)
-            ->setRequest(new Controller\Request($config))
-            ->setHelperManager(new Helper\Manager($config));
+        $this->isValidEnvironment() || die('No application environment defined!');
+        $this->setConfig($config)->setHelperManager(new Helper\Manager($config));
 	}
 
 	/**
@@ -46,7 +45,6 @@ class Application
     {
         if (!$this->_controllerDispatcher) {
             $this->_controllerDispatcher = new Controller\Dispatcher(
-                $this->getRequest(),
                 $this->getConfig(),
                 $this->getHelperManager()
             );
@@ -55,11 +53,11 @@ class Application
     }
 
     /**
-     * @return void
+     * @return boolean
      */
-    private function _checkEnvironment()
+    public function isValidEnvironment()
     {
-        defined('GRIA_ENV') or die('No application environment defined!');
+        return defined('GRIA_ENV');
     }
 
 }

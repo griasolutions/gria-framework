@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Application\Controller;
+namespace GriaDocs\Controller;
 
 
 class Views 

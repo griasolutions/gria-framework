@@ -3,7 +3,7 @@
 	<php>
 		<ini name="memory_limit" value="1512M"/>
 		<const name="PHPUNIT" value="true"/>
-		<const name="GRIA_ENVIRONMENT" value="test"/>
+		<const name="GRIA_ENV" value="test"/>
 	</php>
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="true">

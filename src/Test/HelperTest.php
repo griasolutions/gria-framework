@@ -6,15 +6,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Config;
+namespace Gria\Test;
 
-interface ConfigInterface
+class HelperTest
 {
 
-    /**
-     * @param $key
-     * @return mixed
-     */
-    public function get($key);
+    public function setUp()
+    {
 
-}
+    }
+
+} 

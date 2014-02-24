@@ -9,17 +9,23 @@
 namespace Gria\Controller;
 
 use \Gria\Config;
+use \Gria\Http;
 use \Gria\Helper;
 
 interface ControllerInterface
 {
 
     /**
-     * @param \Gria\Controller\RequestInterface $request
+     * @param \Gria\Http\RequestInterface $request
      * @param \Gria\Config\ConfigInterface $config
      * @param \Gria\Helper\Manager $helperManager
      */
-	public function __construct(RequestInterface $request, Config\ConfigInterface $config, Helper\Manager $helperManager);
+	public function __construct(Http\RequestInterface $request, Config\ConfigInterface $config, Helper\Manager $helperManager);
+
+    /**
+     * @return string
+     */
+    public function getName();
 
 	/**
 	 * @return void
@@ -27,10 +33,11 @@ interface ControllerInterface
 	public function init();
 
 	/**
+     * @param string $action
 	 * @return void
 	 * @throws \Gria\Controller\InvalidActionException
 	 */
-	public function route();
+	public function dispatch($action);
 
 	/**
 	 * @return void
