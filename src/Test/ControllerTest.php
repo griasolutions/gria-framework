@@ -31,7 +31,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(array(
                         'name' => 'you'
                     )));
-        $this->setController(new Controller\Controller($this->getRequest(), $this->getHelperManager(), $this->getConfig()));
+        $this->setController(new Controller\ActionController($this->getRequest(), $this->getHelperManager(), $this->getConfig()));
     }
 
     public function testGotHere()

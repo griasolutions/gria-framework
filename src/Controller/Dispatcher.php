@@ -59,18 +59,24 @@ class Dispatcher
      */
     public function getController($controllerName, \Exception $exception = null)
     {
-        if (!$controller = $this->getAbstractFactory()->get($controllerName)) {
+        $config = $this->getConfig();
+        $namespace = $config->get('namespace') ?: 'Application';
+        $controllerClassName = '\\' . $namespace . '\Controller\\' . ucfirst($controllerName);
+        try {
+            $reflectionClass = new \ReflectionClass($controllerClassName);
+            $controller = $reflectionClass->newInstance($this->getRequest(), $config, $this->getHelperManager());
+            if (method_exists($controller, 'setException')) {
+                $controller->setException($exception);
+            }
+            return $controller;
+        } catch (\ReflectionException $ex) {
             if ($controllerName == 'error') {
                 $errorMessage = 'Please define an error controller and view for your application';
             } else {
-                $errorMessage = sprintf('The %s controller is not defined', $controllerName);
+                $errorMessage = sprintf('Could not find the %s controller', $controllerName);
             }
             throw new InvalidControllerException($errorMessage);
         }
-        if (method_exists($controller, 'setException')) {
-            $controller->setException($exception);
-        }
-        return $controller;
     }
 
     /**
@@ -97,14 +103,6 @@ class Dispatcher
             return $routes['defaultAction'] ?: 'index';
         }
         return strtolower($uriSegments[1]);
-    }
-
-    /**
-     * @return \Gria\Controller\AbstractFactory
-     */
-    public function getAbstractFactory()
-    {
-        return new AbstractFactory($this->getRequest(), $this->getConfig(), $this->getHelperManager());
     }
 
 }

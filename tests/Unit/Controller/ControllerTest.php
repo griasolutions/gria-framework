@@ -16,7 +16,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(array(
                         'name' => 'you'
                     )));
-		$this->setController(new Controller\Controller($this->getRequest(), $this->getHelperManager(), $this->getConfig()));
+		$this->setController(new Controller\ActionController($this->getRequest(), $this->getHelperManager(), $this->getConfig()));
 	}
 
 
@@ -29,7 +29,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 		$this->getRequest()->expects($this->any())
 			->method('getActionName')
 			->will($this->returnValue('test'));
-		$controller = new Controller\Controller($this->getRequest(), $this->getHelperManager(), $this->getConfig());
+		$controller = new Controller\ActionController($this->getRequest(), $this->getHelperManager(), $this->getConfig());
 		$controller->route();
 	}
 
@@ -41,7 +41,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 		$this->getRequest()->expects($this->any())
 			->method('getActionName')
 			->will($this->returnValue('index'));
-		$controller = new Controller\Controller($this->getRequest(), $this->getHelperManager(), $this->getConfig());
+		$controller = new Controller\ActionController($this->getRequest(), $this->getHelperManager(), $this->getConfig());
 		$controller->route();
 		$controller->render();
 		$this->assertEquals('controller', $controller->getView()->getSourcePath());

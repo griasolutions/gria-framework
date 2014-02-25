@@ -8,7 +8,7 @@
 
 namespace Gria\Controller;
 
-class ErrorController extends Controller
+class ErrorController extends ActionController
 {
 
 	/** @var \Exception */

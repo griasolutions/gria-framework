@@ -17,7 +17,7 @@ abstract class ControllerTestAbstract extends \PHPUnit_Framework_TestCase
     /** @var \Gria\Controller\Request */
     private $_request;
 
-    /** @var \Gria\Controller\Controller */
+    /** @var \Gria\Controller\ActionController */
     private $_controller;
 
     /** @var \Gria\Helper\Manager */
@@ -47,7 +47,7 @@ abstract class ControllerTestAbstract extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Gria\Controller\Controller
+     * @return \Gria\Controller\ActionController
      */
     public function getController()
     {

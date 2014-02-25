@@ -13,7 +13,7 @@ use \Gria\Config;
 use \Gria\Helper;
 use \Gria\Http;
 
-class Controller implements ControllerInterface
+class ActionController implements ControllerInterface
 {
 
 	use Http\RequestAwareTrait, Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;

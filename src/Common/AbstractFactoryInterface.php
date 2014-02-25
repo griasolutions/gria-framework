@@ -12,9 +12,8 @@ interface AbstractFactoryInterface
 {
 
     /**
-     * @param string $name
      * @return mixed
      */
-    public function get($name);
+    public function create();
 
 } 
