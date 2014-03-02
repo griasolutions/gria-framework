@@ -15,6 +15,16 @@ class Registry implements RegistryInterface
     private $_registry = [];
 
     /**
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        foreach ($data as $offset => $value) {
+            $this->offsetSet($offset, $value);
+        }
+    }
+
+    /**
      * @param mixed $offset
      * @return bool
      */
