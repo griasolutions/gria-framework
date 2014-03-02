@@ -31,18 +31,20 @@ class Application
      */
 	public function __construct(Config\ConfigInterface $config)
 	{
-        $this->checkEnvironment();
-        $this->setConfig($config);
+        if ($this->isValidEnvironment()) {
+            $this->setConfig($config);
+        }
 	}
 
     /**
-     * Checks the environment
+     * Determines whether or not the environment is valid
      *
-     * @return void
+     * @return boolean
      */
-    public function checkEnvironment()
+    public function isValidEnvironment()
     {
         defined('GRIA_ENV') || die('No application environment defined!');
+        return true;
     }
 
 	/**

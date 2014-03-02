@@ -10,11 +10,12 @@ namespace Gria\View;
 
 use \Gria\Controller;
 use \Gria\Config;
+use \Gria\Helper;
 
 class View implements ViewInterface
 {
 
-	use Config\ConfigAwareTrait;
+	use Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;
 
 	const VIEW_BASE_PATH = 'src/application/views';
 
@@ -26,12 +27,14 @@ class View implements ViewInterface
 	/** @var array */
 	private $_settings = array();
 
-	/**
-	 * @param \Gria\Config\ConfigInterface $config
-	 */
-	public function __construct(Config\ConfigInterface $config)
+    /**
+     * @param \Gria\Config\ConfigInterface $config
+     * @param \Gria\Helper\Manager $helperManager
+     */
+	public function __construct(Config\ConfigInterface $config, Helper\Manager $helperManager)
 	{
 		$this->setConfig($config);
+        $this->setHelperManager($helperManager);
 	}
 
 	/**

@@ -9,52 +9,20 @@
 namespace Gria\Controller;
 
 use \Gria\View;
-use \Gria\Config;
-use \Gria\Helper;
-use \Gria\Http;
 
-class ActionController implements ControllerInterface
+class ActionController extends ControllerAbstract
 {
-
-	use Http\RequestAwareTrait, Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;
-
-	/** @var string */
-    private $_name;
 
     /** @var \Gria\View\View */
 	private $_view;
 
-	/** @var \Gria\Http\ResponseInterface */
-	private $_response;
-
-	/**
-	 * @inheritdoc
-	 */
-	public function __construct(Http\RequestInterface $request, Config\ConfigInterface $config, Helper\Manager $helperManager)
-	{
-	    $this->_name = strtolower(get_class($this));
-		$this->setRequest($request);
-		$this->setConfig($config);
-        $this->setHelperManager($helperManager);
-		$this->_response = new Http\Response();
-		$this->_view = new View\View($this->getConfig());
-		$this->init();
-	}
-
     /**
-     * @return string
+     * @inheritdoc
      */
-    public function getName()
+    public function init()
     {
-        return $this->_name;
+        $this->setView(new View\View($this->getConfig(), $this->getHelperManager()));
     }
-
-	/**
-	 * @inheritdoc
-	 */
-	public function init()
-	{
-	}
 
 	/**
 	 * @inheritdoc
@@ -69,13 +37,6 @@ class ActionController implements ControllerInterface
 	}
 
 	/**
-	 * @return void
-	 */
-	public function indexAction()
-	{
-	}
-
-	/**
 	 * @inheritdoc
 	 */
 	public function render()
@@ -87,36 +48,28 @@ class ActionController implements ControllerInterface
 		$this->getResponse()->setBody($this->getView()->render());
 	}
 
-	/**
-	 * @inheritdoc
-	 */
-	public function respond()
-	{
-		$this->getResponse()->send();
-	}
-
     /**
-     * @inheritdoc
+     * @return void
      */
-    public function getHelper($key)
+    public function indexAction()
     {
-        return $this->getHelperManager()->get($key);
     }
 
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @param View\View $view
+     * @return void
+     */
+    public function setView(View\View $view)
+    {
+        $this->_view = $view;
+    }
+
+    /**
+     * @return \Gria\View\ViewInterface
+     */
 	public function getView()
 	{
 		return $this->_view;
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getResponse()
-	{
-		return $this->_response;
 	}
 
 }

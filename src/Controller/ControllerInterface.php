@@ -49,17 +49,6 @@ interface ControllerInterface
 	 */
 	public function respond();
 
-    /**
-     * @param string $key
-     * @return \Gria\Helper\HelperInterface
-     */
-    public function getHelper($key);
-
-	/**
-	 * @return \Gria\View\ViewInterface
-	 */
-	public function getView();
-
 	/**
 	 * @return \Gria\Http\ResponseInterface
 	 */
