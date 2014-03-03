@@ -9,18 +9,17 @@
 namespace Gria\Controller;
 
 use \Gria\Config;
-use \Gria\Http;
 use \Gria\Helper;
 
 interface ControllerInterface
 {
 
     /**
-     * @param \Gria\Http\RequestInterface $request
+     * @param \Gria\Controller\Request $request
      * @param \Gria\Config\ConfigInterface $config
      * @param \Gria\Helper\Manager $helperManager
      */
-	public function __construct(Http\RequestInterface $request, Config\ConfigInterface $config, Helper\Manager $helperManager);
+	public function __construct(Request $request, Config\ConfigInterface $config, Helper\Manager $helperManager);
 
     /**
      * @return string

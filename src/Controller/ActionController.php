@@ -16,6 +16,9 @@ class ActionController extends ControllerAbstract
     /** @var \Gria\View\View */
 	private $_view;
 
+    /** @var bool */
+    private $_enableView = true;
+
     /**
      * @inheritdoc
      */
@@ -41,11 +44,14 @@ class ActionController extends ControllerAbstract
 	 */
 	public function render()
 	{
-		if (!$this->getView()->getSourcePath()) {
+		$output = '';
+        if ($this->isViewEnabled() && !$this->getView()->getSourcePath()) {
 			$className = strtolower(get_called_class());
 			$this->getView()->setSourcePath(array_pop(explode('\\', $className)));
+            $output = $this->getView()->render();
 		}
-		$this->getResponse()->setBody($this->getView()->render());
+        $this->getResponse()->setStatusCode(200);
+		$this->getResponse()->setBody($output);
 	}
 
     /**
@@ -53,6 +59,16 @@ class ActionController extends ControllerAbstract
      */
     public function indexAction()
     {
+    }
+
+    public function disableView()
+    {
+        $this->_enableView = false;
+    }
+
+    public function isViewEnabled()
+    {
+        return $this->_enableView;
     }
 
     /**

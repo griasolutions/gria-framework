@@ -27,7 +27,7 @@ abstract class ControllerAbstract implements ControllerInterface
     /**
      * @inheritdoc
      */
-    public function __construct(Http\RequestInterface $request, Config\ConfigInterface $config, Helper\Manager $helperManager)
+    public function __construct(Request $request, Config\ConfigInterface $config, Helper\Manager $helperManager)
     {
         $this->_name = strtolower(get_class($this));
         $this->setRequest($request);

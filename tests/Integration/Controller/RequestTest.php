@@ -2,19 +2,16 @@
 
 namespace GriaTest\Unit\Controller;
 
+use \Gria\Controller;
+
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
 
-	use ControllerTestAbstract {
-		setUp as requestTraitSetup;
-	}
+    private $_request;
 
 	public function setUp()
 	{
-		$this->requestTraitSetup();
-		$this->getRequest()->expects($this->any())
-			->method('getUri')
-			->will($this->returnValue('/test'));
+		$this->_request = new Controller\Request('http://localhost/test')
 	}
 
 	public function testGetUrl()
@@ -39,5 +36,13 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 			->will($this->returnValue('/'));
 		$this->assertEquals('dashboard', $dashboardRequest->getControllerName());
 	}
+
+    /**
+     * @return mixed
+     */
+    public function getRequest()
+    {
+        return $this->_request;
+    }
 
 } 
