@@ -4,17 +4,25 @@ namespace GriaTest\Unit\View;
 
 use \Gria\View;
 use \Gria\Config;
-use \GriaTest\Unit\Controller;
+use \Gria\Helper;
 
 class ViewTest extends \PHPUnit_Framework_TestCase
 {
 
-	private $_view;
+	/** @var \Gria\View\View */
+    private $_view;
 
 	public function setUp()
 	{
-		$this->requestTraitSetup();
-		$this->_view = new View\View($this->getRequest(), $this->getConfig());
+        $this->getMock('\IniParser', array('parse'))
+            ->expects($this->any())
+            ->method('parse')
+            ->will($this->returnValue(array(
+                'name' => 'Test Application'
+            )
+        ));
+        $config = new Config\Config('example.ini');
+        $this->_view = new View\View($config, new Helper\Manager($config));
 	}
 
 	public function testGetSet()
@@ -29,14 +37,6 @@ class ViewTest extends \PHPUnit_Framework_TestCase
 		$expectedValue = 'example.phtml';
 		$this->getView()->setSourcePath($expectedValue);
 		$this->assertEquals($expectedValue, $this->getView()->getSourcePath());
-	}
-
-	public function testGetControllerName()
-	{
-		$this->_request->expects($this->any())
-			->method('getControllerName')
-			->will($this->returnValue('test'));
-		$this->assertEquals('test', $this->getView()->getControllerName());
 	}
 
 	public function getView()

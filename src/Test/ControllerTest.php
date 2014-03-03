@@ -31,8 +31,10 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(array(
                         'name' => 'you'
                     )));
-        $this->setController(new Controller\ActionController($this->getRequest(), $this->getHelperManager(), $this->getConfig()));
+        /*$this->setController(new Controller\ActionController($this->getRequest(), $this->getHelperManager(), $this->getConfig()));*/
     }
+
+    /*
 
     public function testGotHere()
     {
@@ -52,9 +54,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
         $this->_dispatcher = new Controller\Dispatcher($mockRequest, $this->getConfig(), $this->getHelperManager());
     }
 
-    /**
-     * @return \Gria\Controller\Dispatcher
-     */
+
     public function getDispatcher()
     {
         return $this->_dispatcher;
@@ -88,5 +88,6 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
         }
         return $this->_config;
     }
+    */
 
 }

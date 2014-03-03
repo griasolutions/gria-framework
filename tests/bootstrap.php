@@ -6,5 +6,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 	dirname(dirname(__FILE__)),
 )));
 
+define('GRIA_PATH', dirname(dirname(__FILE__)));
+
 // pull in composer dependencies
 require 'vendor/autoload.php';

@@ -12,29 +12,36 @@ interface MapperInterface
 {
 
 	/**
-	 * @return string
+	 * Returns the name of the model class.
+     *
+     * @return string
 	 */
 	public function getModelClassName();
 
-	/**
-	 * @param int $offset
-	 * @param int $limit
-	 * @return \ArrayObject
-	 */
-	public function findAll($offset = 0, $limit = 0);
+    /**
+     * Retrieves an array populated with the model whose ID matches the one provided.
+     *
+     * @param $id
+     * @return \ArrayObject
+     */
+    public function findById($id);
 
-	/**
-	 * @param $id
-	 * @return \ArrayObject
-	 */
-	public function findById($id);
+    /**
+     * Retrieves an array of models that match the provided field criteria.
+     *
+     * @param string $field
+     * @param mixed $value
+     * @return \ArrayObject
+     */
+    public function findByField($field, $value);
 
-	/**
-	 * @param string $field
-	 * @param mixed $value
-	 * @return \ArrayObject
-	 */
-	public function findByField($field, $value);
+    /**
+     * Retrieves an array of associated models that match the provided criteria.
+     *
+     * @param array $criteria
+     * @return \ArrayObject
+     */
+	public function findAll(array $criteria);
 
 	/**
 	 * @param array $data
