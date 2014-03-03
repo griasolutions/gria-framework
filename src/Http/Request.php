@@ -30,7 +30,7 @@ class Request implements RequestInterface
     private $_uri;
 
     /** @var array */
-    private $_uriSegments = [];
+    private $_uriSegments;
 
     /** @var string */
     private $_query;
@@ -39,19 +39,18 @@ class Request implements RequestInterface
     private $_fragment;
 
     /**
-     * @inheritdoc
+     * Constructor
      */
     public function __construct($url)
     {
         $this->_url = $url;
         $this->_host = parse_url($url, PHP_URL_HOST);
-        $this->_port = parse_url($url, PHP_URL_PORT);
+        $this->_port = parse_url($url, PHP_URL_PORT) ?: 80;
         $this->_username = parse_url($url, PHP_URL_USER);
         $this->_password = parse_url($url, PHP_URL_PASS);
         $this->_uri = parse_url($url, PHP_URL_PATH);
-        $uriSegments = explode('/', $this->getUri());
-        array_shift($uriSegments);
-        $this->_uriSegments = $uriSegments;
+        $this->_uriSegments = explode('/', $this->_uri);
+        array_shift($this->_uriSegments);
         $this->_query = parse_url($url, PHP_URL_QUERY);
         $this->_fragment = parse_url($url, PHP_URL_FRAGMENT);
     }

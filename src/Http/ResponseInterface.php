@@ -22,10 +22,15 @@ interface ResponseInterface
     public function getHeaders();
 
     /**
-     * @param string $statusCode
+     * @param int $statusCode
      * @return \Gria\Http\ResponseInterface
      */
     public function setStatusCode($statusCode);
+
+    /**
+     * @return int
+     */
+    public function getStatusCode();
 
     /**
      * @param string $contentType

@@ -11,6 +11,9 @@ namespace Gria\Http;
 class Response implements ResponseInterface
 {
 
+    /** @var int */
+    private $_statusCode;
+
 	/** @var array */
 	private static $_statusCodes = [
 		200 => 'OK',
@@ -21,7 +24,7 @@ class Response implements ResponseInterface
 	];
 
 	/** @var array */
-	private $_headers = array();
+	private $_headers = [];
 
 	/** @var string */
 	private $_body;
@@ -49,9 +52,18 @@ class Response implements ResponseInterface
 	{
 		if (array_key_exists($statusCode, static::$_statusCodes)) {
 			$this->addHeader('HTTP/1.0 ' . $statusCode . ' ' . static::$_statusCodes[$statusCode]);
+            $this->_statusCode = $statusCode;
 		}
         return $this;
 	}
+
+    /**
+     * @inheritdoc
+     */
+    public function getStatusCode()
+    {
+        return $this->_statusCode;
+    }
 
     /**
      * @inheritdoc
