@@ -11,16 +11,10 @@ namespace Gria\Helper;
 use \Gria\Common;
 use \Gria\Config;
 
-class Manager implements Common\ManagerInterface
+class Manager
 {
 
-    use Config\ConfigAwareTrait;
-
-    /** @var \Gria\Helper\Registry */
-    private $_registry;
-
-    /** @var \Gria\Helper\AbstractFactory */
-    private $_abstractFactory;
+    use Config\ConfigAwareTrait, Common\RegistryAwareTrait;
 
     /**
      * @param \Gria\Config\ConfigInterface $config
@@ -28,8 +22,7 @@ class Manager implements Common\ManagerInterface
     public function __construct(Config\ConfigInterface $config)
     {
         $this->setConfig($config)
-            ->setRegistry(new Registry())
-            ->setAbstractFactory(new AbstractFactory());
+            ->setRegistry(new Registry());
     }
 
     /**
@@ -37,54 +30,30 @@ class Manager implements Common\ManagerInterface
      * @throws InvalidHelperException
      * @return \Gria\Helper\HelperInterface
      */
-    public function get($name)
+    public function getHelper($name)
     {
         $registry = $this->getRegistry();
         if (isset($registry[$name])) {
             return $registry[$name];
         }
-        $factory = $this->getAbstractFactory();
-        if ($helper = $factory->get($name)) {
-            $registry[$name] = $helper;
+        if ($helper = $this->createHelper($name)) {
+            $this->getRegistry()->offsetSet($name, $helper);
             return $helper;
         }
         throw new InvalidHelperException(sprintf('% is an invalid helper', $name));
     }
 
     /**
-     * @param \Gria\Common\RegistryInterface|\Gria\Helper\Registry $registry
-     * @return $this
+     * @param string $name
+     * @return \Gria\Helper\HelperInterface
      */
-    public function setRegistry(Common\RegistryInterface $registry)
+    public function createHelper($name)
     {
-        $this->_registry = $registry;
-        return $this;
-    }
-
-    /**
-     * @return \Gria\Helper\Registry
-     */
-    public function getRegistry()
-    {
-        return $this->_registry;
-    }
-
-    /**
-     * @param \Gria\Common\AbstractFactoryInterface|\Gria\Helper\AbstractFactory $abstractFactory
-     * @return $this
-     */
-    public function setAbstractFactory(Common\AbstractFactoryInterface $abstractFactory)
-    {
-        $this->_abstractFactory = $abstractFactory;
-        return $this;
-    }
-
-    /**
-     * @return \Gria\Helper\AbstractFactory
-     */
-    public function getAbstractFactory()
-    {
-        return $this->_abstractFactory;
+        $className = '\Application\Helper\\' . $name;
+        if (class_exists($className)) {
+            $helper = new $className;
+            return $helper;
+        }
     }
 
 }

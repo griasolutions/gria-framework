@@ -15,6 +15,15 @@ trait HelperManagerAwareTrait
     private $_helperManager;
 
     /**
+     * @param string $key
+     * @return null|\Gria\Helper\HelperInterface
+     */
+    public function getHelper($key)
+    {
+        return $this->getHelperManager()->get($key);
+    }
+
+    /**
      * @param Manager $helperManager
      * @return $this
      */
@@ -31,4 +40,5 @@ trait HelperManagerAwareTrait
     {
         return $this->_helperManager;
     }
+
 } 
