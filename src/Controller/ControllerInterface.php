@@ -11,10 +11,17 @@ namespace Gria\Controller;
 use \Gria\Config;
 use \Gria\Helper;
 
+/**
+ * Defines the API for all framework controllers.
+ *
+ * @package Gria\Controller
+ */
 interface ControllerInterface
 {
 
     /**
+     * Constructor.
+     *
      * @param \Gria\Controller\Request $request
      * @param \Gria\Config\ConfigInterface $config
      * @param \Gria\Helper\Manager $helperManager
@@ -22,16 +29,22 @@ interface ControllerInterface
     public function __construct(Request $request, Config\ConfigInterface $config, Helper\Manager $helperManager);
 
     /**
+     * Returns the name of the controller.
+     *
      * @return string
      */
     public function getName();
 
     /**
+     * Executes any initialization logic that should be run before the request is dispatched.
+     *
      * @return void
      */
     public function init();
 
     /**
+     * Routes a request to the appropriate controller method.
+     *
      * @param string $action
      * @return void
      * @throws \Gria\Controller\InvalidActionException
@@ -39,16 +52,22 @@ interface ControllerInterface
     public function dispatch($action);
 
     /**
+     * Captures any output generated and registers it with the {@link \Gria\Http\ResponseInterface} object.
+     *
      * @return void
      */
     public function render();
 
     /**
+     * Sends the response to the request.
+     *
      * @return void
      */
     public function respond();
 
     /**
+     * Returns the {@link \Gria\Http\ResponseInterface} response.
+     *
      * @return \Gria\Http\ResponseInterface
      */
     public function getResponse();
