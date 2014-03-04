@@ -8,6 +8,11 @@
 
 namespace Gria\Common;
 
+/**
+ * Base exception class for the framework. Extends {@link \Exception}.
+ *
+ * @package Gria\Common
+ */
 class Exception extends \Exception
 {
 

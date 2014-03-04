@@ -11,12 +11,12 @@ namespace Gria\Model;
 interface MapperInterface
 {
 
-	/**
-	 * Returns the name of the model class.
+    /**
+     * Returns the name of the model class.
      *
      * @return string
-	 */
-	public function getModelClassName();
+     */
+    public function getModelClassName();
 
     /**
      * Retrieves an array populated with the model whose ID matches the one provided.
@@ -41,25 +41,25 @@ interface MapperInterface
      * @param array $criteria
      * @return \ArrayObject
      */
-	public function findAll(array $criteria);
+    public function findAll(array $criteria);
 
-	/**
-	 * @param array $data
-	 * @return boolean
-	 */
-	public function create(array $data);
+    /**
+     * @param array $data
+     * @return boolean
+     */
+    public function create(array $data);
 
-	/**
-	 * @param mixed $id
-	 * @param array $data
-	 * @return boolean
-	 */
-	public function update($id, array $data);
+    /**
+     * @param mixed $id
+     * @param array $data
+     * @return boolean
+     */
+    public function update($id, array $data);
 
-	/**
-	 * @param mixed $id
-	 * @return boolean
-	 */
-	public function delete($id);
+    /**
+     * @param mixed $id
+     * @return boolean
+     */
+    public function delete($id);
 
 } 

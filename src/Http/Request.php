@@ -45,7 +45,7 @@ class Request implements RequestInterface
     {
         $this->_url = $url;
         $this->_host = parse_url($url, PHP_URL_HOST);
-        $this->_port = parse_url($url, PHP_URL_PORT) ?: 80;
+        $this->_port = parse_url($url, PHP_URL_PORT) ? : 80;
         $this->_username = parse_url($url, PHP_URL_USER);
         $this->_password = parse_url($url, PHP_URL_PASS);
         $this->_uri = parse_url($url, PHP_URL_PATH);

@@ -8,10 +8,17 @@
 
 namespace Gria\Common;
 
+/**
+ * Defines the API for {@link \Gria\Common\Registry} classes. Extends {@link \ArrayAccess}.
+ *
+ * @package Gria\Common
+ */
 interface RegistryInterface extends \ArrayAccess
 {
 
     /**
+     * Encodes the offset that is registered with the class.
+     *
      * @param mixed $offset
      * @return mixed
      */

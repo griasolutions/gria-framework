@@ -10,6 +10,11 @@ namespace Gria\Config;
 
 use \Gria\Common;
 
+/**
+ * Exception thrown when an invalid {@link \Gria\Config\ConfigInterface} object is encountered.
+ *
+ * @package Gria\Common
+ */
 class InvalidConfigException extends Common\Exception
 {
 } 

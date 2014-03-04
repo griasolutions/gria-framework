@@ -9,7 +9,7 @@
 namespace GriaDocs\Controller;
 
 
-class Overview 
+class Overview
 {
 
 } 

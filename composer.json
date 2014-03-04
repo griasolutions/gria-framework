@@ -4,23 +4,23 @@
 		"php": ">=5.4.0",
 		"austinhyde/iniparser": "@dev",
 		"icanboogie/inflector": "dev-master",
-        "phpunit/phpunit": ">=3.7",
-        "symfony/yaml": "2.*"
+		"phpunit/phpunit": ">=3.7",
+		"symfony/yaml": "2.*"
 	},
 	"require-dev": {
 		"phpmd/phpmd": "1.4.*",
 		"squizlabs/php_codesniffer": "1.*",
-        "phpdocumentor/phpdocumentor": "2.*"
+		"phpdocumentor/phpdocumentor": "2.*"
 	},
 	"prefer-stable": true,
 	"autoload": {
-        "psr-4": {
-            "Gria\\": "src/",
-            "GriaTest\\": "tests/",
-            "GriaDocs\\Controller\\": "docs/src/application/controllers/",
-            "GriaDocs\\Helper\\": "docs/src/application/helpers/",
-            "GriaDocs\\Model\\": "docs/src/application/models/",
-            "GriaDocsTest\\": "docs/tests/"
-        }
+		"psr-4": {
+			"Gria\\": "src/",
+			"GriaTest\\": "tests/",
+			"GriaDocs\\Controller\\": "docs/src/application/controllers/",
+			"GriaDocs\\Helper\\": "docs/src/application/helpers/",
+			"GriaDocs\\Model\\": "docs/src/application/models/",
+			"GriaDocsTest\\": "docs/tests/"
+		}
 	}
 }

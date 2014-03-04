@@ -4,12 +4,12 @@
 		<ini name="memory_limit" value="1512M"/>
 		<const name="PHPUNIT" value="true"/>
 		<const name="GRIA_ENV" value="test"/>
-    </php>
+	</php>
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="true">
 			<directory>./src</directory>
 			<exclude>
-                <directory>./src/Test</directory>
+				<directory>./src/Test</directory>
 				<directory>./vendor</directory>
 			</exclude>
 		</whitelist>

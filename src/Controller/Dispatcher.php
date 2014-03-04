@@ -15,30 +15,30 @@ use \Gria\Helper;
 class Dispatcher
 {
 
-	use Config\ConfigAwareTrait, Http\RequestAwareTrait, Helper\HelperManagerAwareTrait;
+    use Config\ConfigAwareTrait, Http\RequestAwareTrait, Helper\HelperManagerAwareTrait;
 
     /**
      * @param \Gria\Config\ConfigInterface $config
      */
-	public function __construct(Config\ConfigInterface $config)
-	{
+    public function __construct(Config\ConfigInterface $config)
+    {
         $this->setConfig($config);
-		$this->setRequest(new Request());
+        $this->setRequest(new Request());
         $this->setHelperManager(new Helper\Manager($config));
     }
 
-	/**
-	 * @return void
-	 */
-	public function run()
-	{
-		try {
+    /**
+     * @return void
+     */
+    public function run()
+    {
+        try {
             $controllerName = $this->getControllerName();
             $controller = $this->getController($controllerName);
             $controller->dispatch($this->getActionName());
             $controller->render();
             $controller->respond();
-		} catch (\Exception $ex) {
+        } catch (\Exception $ex) {
             try {
                 $controller = $this->getController('error', $ex);
                 $controller->dispatch($this->getActionName());
@@ -47,8 +47,8 @@ class Dispatcher
             } catch (\Exception $newEx) {
                 die('<div>' . $newEx->getMessage() . '!</div>');
             }
-		}
-	}
+        }
+    }
 
     /**
      * @param string $controllerName
@@ -59,7 +59,7 @@ class Dispatcher
     public function getController($controllerName, \Exception $exception = null)
     {
         $config = $this->getConfig();
-        $namespace = $config->get('namespace') ?: 'Application';
+        $namespace = $config->get('namespace') ? : 'Application';
         $controllerClassName = '\\' . $namespace . '\Controller\\' . ucfirst($controllerName);
         try {
             $reflectionClass = new \ReflectionClass($controllerClassName);
@@ -67,6 +67,7 @@ class Dispatcher
             if (method_exists($controller, 'setException')) {
                 $controller->setException($exception);
             }
+
             return $controller;
         } catch (\ReflectionException $ex) {
             if ($controllerName == 'error') {
@@ -86,8 +87,10 @@ class Dispatcher
         $uriSegments = $this->getRequest()->getUriSegments();
         if (!isset($uriSegments[0]) || $uriSegments[0] == '') {
             $routes = $this->getConfig()->get('routes');
-            return $routes['defaultController'] ?: 'index';
+
+            return $routes['defaultController'] ? : 'index';
         }
+
         return $uriSegments[0];
     }
 
@@ -99,8 +102,10 @@ class Dispatcher
         $uriSegments = $this->getRequest()->getUriSegments();
         if (!isset($uriSegments[1]) || $uriSegments[1] == '') {
             $routes = $this->getConfig()->get('routes');
-            return $routes['defaultAction'] ?: 'index';
+
+            return $routes['defaultAction'] ? : 'index';
         }
+
         return strtolower($uriSegments[1]);
     }
 

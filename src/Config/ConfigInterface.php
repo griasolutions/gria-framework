@@ -8,10 +8,17 @@
 
 namespace Gria\Config;
 
+/**
+ * Defines the API for {@link \Gria\Config\Config} classes.
+ *
+ * @package Gria\Config
+ */
 interface ConfigInterface
 {
 
     /**
+     * Returns the value associated with the provided key.
+     *
      * @param $key
      * @return mixed
      */

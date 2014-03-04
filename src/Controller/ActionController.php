@@ -14,7 +14,7 @@ class ActionController extends ControllerAbstract
 {
 
     /** @var \Gria\View\View */
-	private $_view;
+    private $_view;
 
     /** @var bool */
     private $_enableView = true;
@@ -27,32 +27,32 @@ class ActionController extends ControllerAbstract
         $this->setView(new View\View($this->getConfig(), $this->getHelperManager()));
     }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function dispatch($action)
-	{
+    /**
+     * @inheritdoc
+     */
+    public function dispatch($action)
+    {
         $actionMethodName = $action . 'Action';
-		if (!method_exists($this, $actionMethodName)) {
-			throw new InvalidActionException(sprintf('%s is not a valid action', $action));
-		}
-		$this->$actionMethodName();
-	}
+        if (!method_exists($this, $actionMethodName)) {
+            throw new InvalidActionException(sprintf('%s is not a valid action', $action));
+        }
+        $this->$actionMethodName();
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function render()
-	{
-		$output = '';
+    /**
+     * @inheritdoc
+     */
+    public function render()
+    {
+        $output = '';
         if ($this->isViewEnabled() && !$this->getView()->getSourcePath()) {
-			$className = strtolower(get_called_class());
-			$this->getView()->setSourcePath(array_pop(explode('\\', $className)));
+            $className = strtolower(get_called_class());
+            $this->getView()->setSourcePath(array_pop(explode('\\', $className)));
             $output = $this->getView()->render();
-		}
+        }
         $this->getResponse()->setStatusCode(200);
-		$this->getResponse()->setBody($output);
-	}
+        $this->getResponse()->setBody($output);
+    }
 
     /**
      * @return void
@@ -83,9 +83,9 @@ class ActionController extends ControllerAbstract
     /**
      * @return \Gria\View\ViewInterface
      */
-	public function getView()
-	{
-		return $this->_view;
-	}
+    public function getView()
+    {
+        return $this->_view;
+    }
 
 }

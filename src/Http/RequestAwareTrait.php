@@ -21,6 +21,7 @@ trait RequestAwareTrait
     public function setRequest(RequestInterface $request)
     {
         $this->_request = $request;
+
         return $this;
     }
 

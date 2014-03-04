@@ -29,8 +29,8 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->any())
             ->method('parse')
             ->will($this->returnValue(array(
-                        'name' => 'you'
-                    )));
+                'name' => 'you'
+            )));
         /*$this->setController(new Controller\ActionController($this->getRequest(), $this->getHelperManager(), $this->getConfig()));*/
     }
 

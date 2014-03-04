@@ -11,9 +11,9 @@ namespace Gria\Model;
 interface ModelInterface
 {
 
-	/**
-	 * @return mixed
-	 */
-	public function getId();
+    /**
+     * @return mixed
+     */
+    public function getId();
 
 }

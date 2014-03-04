@@ -25,7 +25,7 @@ class Request extends Http\Request
     public function __construct()
     {
         $protocol = ($this->getServer('HTTPS') ? 'https' : 'http') . '://';
-        $url =  $protocol . $this->getServer('HTTP_HOST') . $this->getServer('REQUEST_URI');
+        $url = $protocol . $this->getServer('HTTP_HOST') . $this->getServer('REQUEST_URI');
         parent::__construct($url);
         if ($this->getContentType() == 'application/x-www-form-urlencoded' && ($this->isPut() || $this->isDelete())) {
             $data = file_get_contents('php://input');

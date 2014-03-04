@@ -30,6 +30,7 @@ trait HelperManagerAwareTrait
     public function setHelperManager(Manager $helperManager)
     {
         $this->_helperManager = $helperManager;
+
         return $this;
     }
 

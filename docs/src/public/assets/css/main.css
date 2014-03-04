@@ -1,1 +1,57 @@
-@import "../lib/bootstrap/bootstrap.min.css";@import "../lib/bootstrap/bootstrap-theme.min.css";@import "../lib/font-awesome/css/font-awesome.min.css";@font-face{font-family:"Raleway";src:url("../fonts/raleway_thin.eot");src:url("../fonts/raleway_thin.eot") format('embedded-opentype'),url('../fonts/raleway_thin.ttf') format('truetype');font-weight:normal;font-style:normal}@font-face{font-family:"Open Sans";src:url("../fonts/OpenSans-Regular.ttf") format("truetype");font-weight:normal;font-style:normal}@font-face{font-family:"Open Sans";src:url("../fonts/OpenSans-Bold.ttf") format("truetype");font-weight:bold;font-style:normal}@font-face{font-family:"Open Sans";src:url("../fonts/OpenSans-Italic.ttf") format("truetype");font-weight:normal;font-style:italic}@font-face{font-family:"Open Sans";src:url("../fonts/OpenSans-SemiboldItalic.ttf") format("truetype");font-weight:bold;font-style:italic}body,input,textarea,button,select{font-family:"Open Sans",Helvetica,Geneva,sans-serif}footer{text-align:center}.jumbotron h1{font-family:Raleway,sans-serif;font-size:7em;font-weight:100}.jumbotron p{font-size:2em}
+@import "../lib/bootstrap/bootstrap.min.css";
+@import "../lib/bootstrap/bootstrap-theme.min.css";
+@import "../lib/font-awesome/css/font-awesome.min.css";
+
+@font-face {
+    font-family: "Raleway";
+    src: url("../fonts/raleway_thin.eot");
+    src: url("../fonts/raleway_thin.eot") format('embedded-opentype'), url('../fonts/raleway_thin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-SemiboldItalic.ttf") format("truetype");
+    font-weight: bold;
+    font-style: italic
+}
+
+body, input, textarea, button, select {
+    font-family: "Open Sans", Helvetica, Geneva, sans-serif
+}
+
+footer {
+    text-align: center
+}
+
+.jumbotron h1 {
+    font-family: Raleway, sans-serif;
+    font-size: 7em;
+    font-weight: 100
+}
+
+.jumbotron p {
+    font-size: 2em
+}

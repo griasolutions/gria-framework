@@ -8,7 +8,7 @@
 
 namespace GriaDocs\Controller;
 
-class Configuration 
+class Configuration
 {
 
 } 

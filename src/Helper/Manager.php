@@ -38,6 +38,7 @@ class Manager
         }
         if ($helper = $this->createHelper($name)) {
             $this->getRegistry()->offsetSet($name, $helper);
+
             return $helper;
         }
         throw new InvalidHelperException(sprintf('% is an invalid helper', $name));
@@ -52,6 +53,7 @@ class Manager
         $className = '\Application\Helper\\' . $name;
         if (class_exists($className)) {
             $helper = new $className;
+
             return $helper;
         }
     }

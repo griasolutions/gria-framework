@@ -8,28 +8,37 @@
 
 namespace Gria\Config;
 
+/**
+ * Defines the API for classes that are aware of instances of the {@link \Gria\Config\ConfigInterface} interface.
+ *
+ * @package Gria\Common
+ */
 trait ConfigAwareTrait
 {
 
-	/** @var \Gria\Config\Config * */
-	private $_config;
+    /** @var \Gria\Config\Config * */
+    private $_config;
 
-	/**
-	 * @param \Gria\Config\ConfigInterface $config
-	 * @return $this
-	 */
-	public function setConfig(ConfigInterface $config)
-	{
-		$this->_config = $config;
-		return $this;
-	}
+    /**
+     * Registers the provided {@link \Gria\Config\ConfigInterface} with this class.
+     *
+     * @param \Gria\Config\ConfigInterface $config
+     * @return \Gria\Config\ConfigAwareTrait
+     */
+    public function setConfig(ConfigInterface $config)
+    {
+        $this->_config = $config;
+        return $this;
+    }
 
-	/**
-	 * @return \Gria\Config\ConfigInterface
-	 */
-	public function getConfig()
-	{
-		return $this->_config;
-	}
+    /**
+     * Returns the instance of {@link \Gria\Config\ConfigInterface} registered with this class.
+     *
+     * @return \Gria\Config\ConfigInterface
+     */
+    public function getConfig()
+    {
+        return $this->_config;
+    }
 
 }

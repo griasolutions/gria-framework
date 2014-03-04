@@ -27,7 +27,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testToString()
     {
         $this->assertEquals($this->getUrl(), $this->getRequest()->getUrl());
-        $this->assertEquals($this->getUrl(), (string) $this->getRequest());
+        $this->assertEquals($this->getUrl(), (string)$this->getRequest());
     }
 
     public function testGetHost()

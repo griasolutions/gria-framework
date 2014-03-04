@@ -9,7 +9,7 @@
 namespace GriaDocs\Controller;
 
 
-class Requests 
+class Requests
 {
 
 } 

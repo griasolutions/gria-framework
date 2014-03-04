@@ -11,17 +11,17 @@ class ActionControllerTest extends \PHPUnit_Framework_TestCase
     /** @var \Gria\Controller\ActionController */
     private $_controller;
 
-	public function setUp()
-	{
+    public function setUp()
+    {
         parent::setUp();
         $request = $this->getMock('\Gria\Controller\Request', array('getServer'));
         $request->expects($this->any())
             ->method('getServer')
             ->will($this->returnValue('localhost'));
         $config = $this->getMock('\Gria\Config\Config');
-		$helperManager = new Helper\Manager($config);
+        $helperManager = new Helper\Manager($config);
         $this->_controller = new Controller\ActionController($request, $config, $helperManager);
-	}
+    }
 
     public function testGetName()
     {
@@ -48,16 +48,16 @@ class ActionControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Gria\View\View', $this->getController()->getView());
     }
 
-	public function testRespond()
-	{
-		$this->markTestSkipped();
+    public function testRespond()
+    {
+        $this->markTestSkipped();
         $controller = $this->getController();
         $controller->disableView();
-		$controller->dispatch('index');
-		$controller->render();
+        $controller->dispatch('index');
+        $controller->render();
         $controller->respond();
         $this->assertNull($controller->getResponse()->getBody());
-	}
+    }
 
     public function testRender()
     {

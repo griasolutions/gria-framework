@@ -26,9 +26,9 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
             ->expects($this->any())
             ->method('parse')
             ->will($this->returnValue(array(
-                'name' => 'Test Application'
-            )
-        ));
+                    'name' => 'Test Application'
+                )
+            ));
         $this->_application = new Application\Application(new Config\Config('example.ini'));
     }
 

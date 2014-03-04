@@ -2,8 +2,8 @@
 
 // set the include path
 set_include_path(implode(PATH_SEPARATOR, array(
-	get_include_path(),
-	dirname(dirname(__FILE__)),
+    get_include_path(),
+    dirname(dirname(__FILE__)),
 )));
 
 define('GRIA_PATH', dirname(dirname(__FILE__)));
