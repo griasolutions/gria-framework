@@ -11,6 +11,7 @@ namespace Gria\Application;
 use \Gria\Config;
 use \Gria\Http;
 use \Gria\Controller;
+use \Gria\Helper;
 
 /**
  * Performs initial checks and kicks off the MVC application. If any problems bubble up to this level, we simply stop
@@ -72,7 +73,10 @@ class Application
     public function getControllerDispatcher()
     {
         if (!$this->_controllerDispatcher) {
-            $this->_controllerDispatcher = new Controller\Dispatcher($this->getConfig());
+            $config = $this->getConfig();
+            $request = new Controller\Request();
+            $helperManager = new Helper\Manager($config);
+            $this->_controllerDispatcher = new Controller\Dispatcher($config, $request, $helperManager);
         }
 
         return $this->_controllerDispatcher;

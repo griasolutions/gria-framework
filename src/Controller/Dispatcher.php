@@ -19,12 +19,14 @@ class Dispatcher
 
     /**
      * @param \Gria\Config\ConfigInterface $config
+     * @param \Gria\Controller\Request $request
+     * @param \Gria\Helper\Manager $helperManager
      */
-    public function __construct(Config\ConfigInterface $config)
+    public function __construct(Config\ConfigInterface $config, Request $request, Helper\Manager $helperManager)
     {
         $this->setConfig($config);
-        $this->setRequest(new Request());
-        $this->setHelperManager(new Helper\Manager($config));
+        $this->setRequest($request);
+        $this->setHelperManager($helperManager);
     }
 
     /**
