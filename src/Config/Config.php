@@ -35,12 +35,13 @@ class Config implements ConfigInterface
     /**
      * @inheritdoc
      */
-    public function get($key)
+    public function get($key, $default = null)
     {
         $data = $this->getData();
         if (array_key_exists($key, $data)) {
             return $data[$key];
         }
+        return $default;
     }
 
     /**

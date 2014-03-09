@@ -21,8 +21,7 @@ class Manager
      */
     public function __construct(Config\ConfigInterface $config)
     {
-        $this->setConfig($config)
-            ->setRegistry(new Registry());
+        $this->setConfig($config)->setRegistry(new Registry());
     }
 
     /**
@@ -36,7 +35,7 @@ class Manager
         if (isset($registry[$name])) {
             return $registry[$name];
         }
-        if ($helper = $this->createHelper($name)) {
+        if ($helper = $this->_createHelper($name)) {
             $this->getRegistry()->offsetSet($name, $helper);
 
             return $helper;
@@ -48,7 +47,7 @@ class Manager
      * @param string $name
      * @return \Gria\Helper\HelperInterface
      */
-    public function createHelper($name)
+    private function _createHelper($name)
     {
         $className = '\Application\Helper\\' . $name;
         if (class_exists($className)) {

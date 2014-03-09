@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of the Gria Framework package.
  *
@@ -7,8 +6,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Controller;
+namespace Gria\View;
 
-class InvalidArgumentException extends InvalidControllerException
+use \Gria\Helper;
+
+class PartialHelper extends Helper\HelperAbstract
 {
+
+    public function load($path)
+    {
+        include $path;
+    }
+
 } 

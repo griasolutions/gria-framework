@@ -1,6 +1,6 @@
 <?php
 
-namespace GriaTest\Unit\Controller;
+namespace GriaTest\Integration\Controller;
 
 use \Gria\Controller;
 use \Gria\Test;

@@ -3,45 +3,70 @@
 namespace GriaTest\Unit\View;
 
 use \Gria\View;
-use \Gria\Config;
-use \Gria\Helper;
+use \Gria\Test;
 
-class ViewTest extends \PHPUnit_Framework_TestCase
+class ViewTest extends Test\IntegrationTestAbstract
 {
 
-    /** @var \Gria\View\View */
-    private $_view;
-
-    public function setUp()
+    public function testGetSetPath()
     {
-        $this->getMock('\IniParser', array('parse'))
-            ->expects($this->any())
-            ->method('parse')
-            ->will($this->returnValue(array(
-                    'name' => 'Test Application'
-                )
-            ));
-        $config = new Config\Config('example.ini');
-        $this->_view = new View\View($config, new Helper\Manager($config));
+        $view = $this->getMockView();
+        $path = 'example';
+        $expectedPath = sprintf('%s/%s.%s', $view->getDefaultBasePath(), $path, $view->getDefaultExtension());
+        $view->setPath($path);
+        $this->assertEquals($expectedPath, $view->getPath(),
+            'Verified that view path is built correctly using default settings.');
     }
 
-    public function testGetSet()
+    public function testGetSetPathCustom()
     {
-        $expectedValue = 'data';
-        $this->getView()->set('example', $expectedValue);
-        $this->assertEquals($expectedValue, $this->getView()->get('example'));
+        $viewPath = 'custom-view';
+        $customBasePath = __DIR__ . '/';
+        $customExtension = 'inc';
+        $customConfig = array('view' => array(
+            'basePath' => $customBasePath,
+            'extension' => $customExtension
+        ));
+        $view = $this->getMockView($customConfig);
+        $this->assertEquals($customConfig['view'], $view->getConfig()->get('view'));
+        $expectedPath = sprintf('%s/%s.%s', $customBasePath, $viewPath, $customExtension);
+        $view->setPath($viewPath);
+        $this->assertEquals($expectedPath, $view->getPath(),
+            'Verified that view path is built correctly using custom settings.');
     }
 
-    public function testGetSetSourcePath()
+    /**
+     * @expectedException \Gria\View\InvalidViewException
+     */
+    public function testRenderInvalidView()
     {
-        $expectedValue = 'example.phtml';
-        $this->getView()->setSourcePath($expectedValue);
-        $this->assertEquals($expectedValue, $this->getView()->getSourcePath());
+        $view = $this->getMockView();
+        $view->setPath('invalid');
+        $view->render();
     }
 
-    public function getView()
+    public function testRender()
     {
-        return $this->_view;
+        $customBasePath = __DIR__ . '/';
+        $customConfig = array('view' => array(
+            'basePath' => $customBasePath
+        ));
+        $viewContent = 'This is a view file!';
+        $viewPath = 'view-render';
+        $view = $this->getMockView($customConfig);
+        $fullViewPath = __DIR__ . '/' . $viewPath . '.' . $view->getDefaultExtension();
+        file_put_contents($fullViewPath, $viewContent);
+        $view->setPath($viewPath);
+        $this->assertEquals($viewContent, $view->render(),
+            'Verified that the view renders.');
+        unlink($fullViewPath);
+    }
+
+
+    public function getMockView(array $data = ['name' => 'Test Application'])
+    {
+        $view = new View\View($this->getMockConfig($data), $this->getMockHelperManager($data));
+        return $view;
     }
 
 } 

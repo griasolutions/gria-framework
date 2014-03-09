@@ -8,67 +8,44 @@
 
 namespace Gria\View;
 
+use \Gria\Common;
 use \Gria\Controller;
 use \Gria\Config;
 use \Gria\Helper;
 
-class View implements ViewInterface
+class View extends Common\Registry implements ViewInterface
 {
 
     use Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;
 
-    const VIEW_BASE_PATH = 'src/application/views';
-
-    const VIEW_FILE_EXTENSION = 'phtml';
+    /** @var string */
+    private $_path;
 
     /** @var string */
-    private $_sourcePath;
+    private $_defaultBasePath = 'src/application/views/layouts';
 
-    /** @var array */
-    private $_settings = array();
+    /** @var string */
+    private $_defaultExtension = 'phtml';
 
     /**
      * @param \Gria\Config\ConfigInterface $config
      * @param \Gria\Helper\Manager $helperManager
+     * @param array $data
      */
-    public function __construct(Config\ConfigInterface $config, Helper\Manager $helperManager)
+    public function __construct(Config\ConfigInterface $config, Helper\Manager $helperManager, array $data = [])
     {
         $this->setConfig($config);
         $this->setHelperManager($helperManager);
+        parent::__construct($data);
+        $this->_defaultBasePath = GRIA_PATH . '/' . $this->_defaultBasePath;
     }
 
     /**
-     * @inheritdoc
+     * @see \Gria\View\View::render()
      */
-    public function setSourcePath($sourcePath)
+    public function __toString()
     {
-        $this->_sourcePath = $sourcePath;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getSourcePath()
-    {
-        return $this->_sourcePath;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function set($key, $value)
-    {
-        $this->_settings[$key] = $value;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function get($key)
-    {
-        if (array_key_exists($key, $this->_settings)) {
-            return $this->_settings[$key];
-        }
+        return $this->render();
     }
 
     /**
@@ -76,35 +53,66 @@ class View implements ViewInterface
      */
     public function render()
     {
-        return $this->_renderTemplate('layouts/' . $this->getSourcePath());
+        if (!ob_start('ob_gzhandler')) {
+            ob_start();
+        }
+        $path = $this->getPath();
+        if (!file_exists($path)) {
+            $errorMessage = sprintf('%s is not a valid view file.', $path);
+            throw new InvalidViewException($errorMessage);
+        }
+        include $path;
+        $content = ob_get_clean();
+        return $content;
     }
 
     /**
      * @inheritdoc
      */
-    public function renderPartial($partial)
+    public function setPath($path)
     {
-        return $this->_renderTemplate('partials/' . $partial);
+        $viewConfig = $this->getConfig()->get('view');
+        $basePath = isset($viewConfig['basePath']) ? $viewConfig['basePath'] : $this->getDefaultBasePath();
+        $extension = isset($viewConfig['extension']) ? $viewConfig['extension'] : $this->getDefaultExtension();
+        $this->_path = sprintf('%s/%s.%s', $basePath, $path, $extension);
     }
 
     /**
-     * @param string $templateName
-     * @throws \Gria\View\InvalidViewException
-     * @return string
+     * @inheritdoc
      */
-    private function _renderTemplate($templateName)
+    public function getPath()
     {
-        $path = GRIA_PATH . '/' . static::VIEW_BASE_PATH . '/' . $templateName . '.'
-            . static::VIEW_FILE_EXTENSION;
-        if (!file_exists($path)) {
-            $errorMessage = sprintf('%s is not a valid template', $path);
-            throw new InvalidViewException($errorMessage);
-        }
-        ob_start();
-        include $path;
-        $output = ob_get_clean();
-
-        return $output;
+        return $this->_path;
     }
 
-} 
+    /**
+     * Returns the default base path to the view files.
+     *
+     * @return string
+     */
+    public function getDefaultBasePath()
+    {
+        return $this->_defaultBasePath;
+    }
+
+    /**
+     * Returns the default view file extension.
+     *
+     * @return string
+     */
+    public function getDefaultExtension()
+    {
+        return $this->_defaultExtension;
+    }
+
+    /**
+     * @param $path
+     */
+    public function loadPartial($path)
+    {
+        /** @var $partialHelper \Gria\View\PartialHelper */
+        $partialHelper = $this->getHelperManager()->getHelper('partial');
+        $partialHelper->load($path);
+    }
+
+}

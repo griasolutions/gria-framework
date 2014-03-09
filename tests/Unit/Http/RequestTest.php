@@ -10,6 +10,11 @@ namespace GriaTest\Unit\Http;
 
 use \Gria\Http;
 
+/**
+ * Tests {@link \Gria\Http\Request}.
+ *
+ * @package GriaTest\Unit\Http
+ */
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -19,17 +24,30 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     /** @var \Gria\Http\RequestInterface */
     private $_request;
 
+    /**
+     * @inheritdoc
+     */
     public function setUp()
     {
         $this->_request = new Http\Request($this->getUrl());
     }
 
+    /**
+     * Tests {@link \Gria\Http\Request::__toString()}.
+     *
+     * @return void
+     */
     public function testToString()
     {
         $this->assertEquals($this->getUrl(), $this->getRequest()->getUrl());
         $this->assertEquals($this->getUrl(), (string)$this->getRequest());
     }
 
+    /**
+     * Tests {@link \Gria\Http\Request::getHost()}.
+     *
+     * @return void
+     */
     public function testGetHost()
     {
         $this->assertEquals('localhost', $this->getRequest()->getHost());
@@ -37,6 +55,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('localhost.com', $request->getHost());
     }
 
+    /**
+     * Tests {@link \Gria\Http\Request::getPort()}.
+     *
+     * @return void
+     */
     public function testGetPort()
     {
         $this->assertEquals(80, $this->getRequest()->getPort());
@@ -44,6 +67,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(8080, $request->getPort());
     }
 
+    /**
+     * Tests {@link \Gria\Http\Request::getUsername()}.
+     *
+     * @return void
+     */
     public function testGetUsername()
     {
         $this->assertEquals('guillermo', $this->getRequest()->getUsername());
@@ -51,6 +79,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($request->getUsername());
     }
 
+    /**
+     * Tests {@link \Gria\Http\Request::getPassword()}.
+     *
+     * @return void
+     */
     public function testGetPassword()
     {
         $this->assertEquals('fisher', $this->getRequest()->getPassword());
@@ -58,6 +91,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($request->getPassword());
     }
 
+    /**
+     * Tests {@link \Gria\Http\Request::getUri()}.
+     *
+     * @return void
+     */
     public function testGetUri()
     {
         $this->assertEquals('/fake/request', $this->getRequest()->getUri());
@@ -65,6 +103,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($request->getUri());
     }
 
+    /**
+     * Tests {@link \Gria\Http\Request::getUriSegments()}.
+     *
+     * @return void
+     */
     public function testGetUriSegments()
     {
         $this->assertEquals(array('fake', 'request'), $this->getRequest()->getUriSegments());
@@ -72,6 +115,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $request->getUriSegments());
     }
 
+    /**
+     * Tests {@link \Gria\Http\Request::getQuery()}.
+     *
+     * @return void
+     */
     public function testGetQuery()
     {
         $this->assertEquals('a=1&b=foo', $this->getRequest()->getQuery());
@@ -79,6 +127,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($request->getQuery());
     }
 
+    /**
+     * Tests {@link \Gria\Http\Request::getFragment()}.
+     *
+     * @return void
+     */
     public function testGetFragment()
     {
         $this->assertNull($this->getRequest()->getFragment());
@@ -87,6 +140,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Returns the url.
+     *
      * @return string
      */
     public function getUrl()
@@ -95,6 +150,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Returns an instance of {@link \Gria\Http\RequestInterface}.
+     *
      * @return \Gria\Http\RequestInterface
      */
     public function getRequest()
@@ -103,4 +160,3 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     }
 
 }
- 

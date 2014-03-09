@@ -6,8 +6,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Common;
+namespace GriaTest\Unit\Common;
 
+use \Gria\Common;
+
+/**
+ * Tests {@link \Gria\Common\Registry}.
+ *
+ * @package GriaTest\Unit\Common
+ */
 class RegistryTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -18,9 +25,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     private $_expectedRegistryData;
 
     /**
-     * Sets up the registry object.
-     *
-     * @return void
+     * @inheritdoc
      */
     public function setUp()
     {
@@ -31,7 +36,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
             'person' => $person,
             'state' => 'confusion'
         );
-        $this->_registry = new Registry($this->_expectedRegistryData);
+        $this->_registry = new Common\Registry($this->_expectedRegistryData);
     }
 
     /**
@@ -86,7 +91,9 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return mixed
+     * Returns the registry.
+     *
+     * @return \Gria\Common\Registry
      */
     public function getRegistry()
     {
@@ -94,7 +101,9 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return mixed
+     * Returns the array of expected data.
+     *
+     * @return array
      */
     public function getExpectedRegistryData()
     {

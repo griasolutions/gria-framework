@@ -1,9 +1,14 @@
 <?php
 
-namespace GriaTest\Unit\Config;
+namespace GriaTest\Integration\Config;
 
 use \Gria\Config;
 
+/**
+ * Tests {@link \Gria\Config\Config}.
+ *
+ * @package GriaTest\Integration\Config
+ */
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -31,7 +36,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests whether or not we can get the correct values out of the config.
+     * Tests {@link \Gria\Config\Config::get()}.
+     *
+     * @return void
      */
     public function testGetValues()
     {
@@ -43,7 +50,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the correct path is returned once set.
+     * Tests {@link \Gria\Config\Config::getPath()}.
+     *
+     * @return void
      */
     public function testGetPath()
     {
@@ -54,6 +63,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Returns an instance of {@link \Gria\Config\Config}.
+     *
      * @return \Gria\Config\Config
      */
     public function getConfig()
@@ -62,6 +73,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Returns an array of fixture data.
+     *
      * @return array
      */
     public function getFixtureData()

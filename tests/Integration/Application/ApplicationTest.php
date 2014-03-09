@@ -6,11 +6,16 @@
  * file that was distributed with this source code.
  */
 
-namespace GriaTest\Unit\Application;
+namespace GriaTest\Integration\Application;
 
 use \Gria\Application;
 use \Gria\Config;
 
+/**
+ * Tests {@link \Gria\Application\Application}.
+ *
+ * @package GriaTest\Integration\Application
+ */
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -33,7 +38,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests the environment check.
+     * Tests {@link \Gria\Application\Application::isValidEnvironment()}.
      */
     public function testIsValidEnvironment()
     {
@@ -41,7 +46,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that a controller dispatcher is returned.
+     * Tests {@link \Gria\Application\Application::getControllerDispatcher()}.
      */
     public function testGetControllerDispatcher()
     {
@@ -50,6 +55,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Returns an instance of {@link \Gria\Application\Application}.
+     *
      * @return \Gria\Application\Application
      */
     public function getApplication()

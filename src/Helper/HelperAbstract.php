@@ -10,7 +10,7 @@ namespace Gria\Helper;
 
 use \Gria\Config;
 
-class HelperAbstract implements HelperInterface
+abstract class HelperAbstract implements HelperInterface
 {
 
     use Config\ConfigAwareTrait;

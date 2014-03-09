@@ -32,6 +32,47 @@ class Registry implements RegistryInterface
     }
 
     /**
+     * @see \Gria\Common\Registry::has()
+     * @param $offset
+     * @return bool
+     */
+    public function has($offset)
+    {
+        return $this->offsetExists($offset);
+    }
+
+    /**
+     * @see \Gria\Common\Registry::get()
+     * @param $offset
+     * @return mixed
+     */
+    public function get($offset)
+    {
+        return $this->offsetGet($offset);
+    }
+
+    /**
+     * @see \Gria\Common\Registry::set()
+     * @param string $offset
+     * @param mixed $value
+     * @return \Gria\Common\Registry
+     */
+    public function set($offset, $value)
+    {
+        return $this->offsetSet($offset, $value);
+    }
+
+    /**
+     * @see \Gria\Common\Registry::has()
+     * @param $offset
+     * @return bool
+     */
+    public function remove($offset)
+    {
+        return $this->offsetUnset($offset);
+    }
+
+    /**
      * Determines whether or not an offset is registered with the class.
      *
      * @param mixed $offset
@@ -76,11 +117,13 @@ class Registry implements RegistryInterface
      * Un-registers an offset and the associated value with the class.
      *
      * @param mixed $offset
+     * @return \Gria\Common\Registry
      */
     public function offsetUnset($offset)
     {
         $encodedOffset = $this->encodeOffset($offset);
         unset($this->_registry[$encodedOffset]);
+        return $this;
     }
 
     /**

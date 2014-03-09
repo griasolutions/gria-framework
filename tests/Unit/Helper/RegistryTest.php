@@ -10,15 +10,24 @@ namespace GriaTest\Unit\Helper;
 
 use \Gria\Helper;
 
+/**
+ * Tests {@link \Gria\Helper\Registry}.
+ *
+ * @package GriaTest\Unit\Helper
+ */
 class RegistryTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * Tests {@link \Gria\Helper\Registry::encodeOffset()}.
+     */
     public function testEncodeOffset()
     {
         $registry = new Helper\Registry();
-        $registry->offsetSet('TestOffset', 'hey');
-        $this->assertTrue($registry->offsetExists('testoffset'));
-        $this->assertTrue($registry->offsetExists('TestOffset'));
+        $offset = 'TestOffset';
+        $registry->offsetSet($offset, 'hey');
+        $this->assertTrue($registry->offsetExists(strtoupper($offset)));
+        $this->assertTrue($registry->offsetExists($offset));
     }
 
 }

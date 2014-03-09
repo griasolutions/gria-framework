@@ -8,6 +8,7 @@
 
 namespace Gria\Controller;
 
+use Gria\Http\Response;
 use \Gria\View;
 
 class ActionController extends ControllerAbstract
@@ -40,14 +41,21 @@ class ActionController extends ControllerAbstract
     }
 
     /**
+     * @return void
+     */
+    public function indexAction()
+    {
+    }
+
+    /**
      * @inheritdoc
      */
     public function render()
     {
         $output = '';
-        if ($this->isViewEnabled() && !$this->getView()->getSourcePath()) {
+        if ($this->isViewEnabled()) {
             $className = strtolower(get_called_class());
-            $this->getView()->setSourcePath(array_pop(explode('\\', $className)));
+            $this->getView()->setPath(array_pop(explode('\\', $className)));
             $output = $this->getView()->render();
         }
         $this->getResponse()->setStatusCode(200);
@@ -55,32 +63,50 @@ class ActionController extends ControllerAbstract
     }
 
     /**
+     * Enables the view.
+     *
      * @return void
      */
-    public function indexAction()
+    public function enableView()
     {
+        $this->_enableView = true;
     }
 
+    /**
+     * Disables the view.
+     *
+     * @return void
+     */
     public function disableView()
     {
         $this->_enableView = false;
     }
 
+    /**
+     * Returns the status of the view.
+     *
+     * @return bool
+     */
     public function isViewEnabled()
     {
         return $this->_enableView;
     }
 
     /**
+     * Registers the view with this controller.
+     *
      * @param View\View $view
-     * @return void
+     * @return \Gria\Controller\ActionController
      */
     public function setView(View\View $view)
     {
         $this->_view = $view;
+        return $this;
     }
 
     /**
+     * Returns the view.
+     *
      * @return \Gria\View\ViewInterface
      */
     public function getView()

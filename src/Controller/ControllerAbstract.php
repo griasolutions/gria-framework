@@ -29,7 +29,7 @@ abstract class ControllerAbstract implements ControllerInterface
      */
     public function __construct(Request $request, Config\ConfigInterface $config, Helper\Manager $helperManager)
     {
-        $this->_name = strtolower(get_class($this));
+        $this->_name = substr(strtolower(str_replace(__NAMESPACE__, '', get_class($this))), 1);
         $this->setRequest($request);
         $this->setConfig($config);
         $this->setHelperManager($helperManager);
