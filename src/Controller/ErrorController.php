@@ -29,7 +29,7 @@ class ErrorController extends ActionController
      */
     public function render()
     {
-        $this->getView()->setSourcePath('error');
+        $this->getView()->setPath('error');
         parent::render();
     }
 
