@@ -95,7 +95,7 @@ class ActionController extends ControllerAbstract
     /**
      * Registers the view with this controller.
      *
-     * @param View\View $view
+     * @param \Gria\View\View $view
      * @return \Gria\Controller\ActionController
      */
     public function setView(View\View $view)
@@ -107,7 +107,7 @@ class ActionController extends ControllerAbstract
     /**
      * Returns the view.
      *
-     * @return \Gria\View\ViewInterface
+     * @return \Gria\View\View
      */
     public function getView()
     {
