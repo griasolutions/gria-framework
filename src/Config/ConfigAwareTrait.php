@@ -23,7 +23,7 @@ trait ConfigAwareTrait
      * Registers the provided {@link \Gria\Config\ConfigInterface} with this class.
      *
      * @param \Gria\Config\ConfigInterface $config
-     * @return \Gria\Config\ConfigAwareTrait
+     * @return $this
      */
     public function setConfig(ConfigInterface $config)
     {

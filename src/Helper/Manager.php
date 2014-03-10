@@ -40,7 +40,7 @@ class Manager
 
             return $helper;
         }
-        throw new InvalidHelperException(sprintf('% is an invalid helper', $name));
+        throw new InvalidHelperException(sprintf('%s is an invalid helper', $name));
     }
 
     /**
@@ -49,11 +49,14 @@ class Manager
      */
     private function _createHelper($name)
     {
-        $className = '\Application\Helper\\' . $name;
-        if (class_exists($className)) {
-            $helper = new $className;
-
-            return $helper;
+        $namespaces = array($this->getConfig()->get('namespace') ?: 'Application', 'Gria');
+        $classNameFormat = '\%s\Helper\%s';
+        foreach ($namespaces as $namespace) {
+            $className = sprintf($classNameFormat, $namespace, $name);
+            if (class_exists($className)) {
+                $helper = new $className($this->getConfig());
+                return $helper;
+            }
         }
     }
 

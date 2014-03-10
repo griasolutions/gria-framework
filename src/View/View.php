@@ -53,9 +53,7 @@ class View extends Common\Registry implements ViewInterface
      */
     public function render()
     {
-        if (!ob_start('ob_gzhandler')) {
-            ob_start();
-        }
+        ob_start();
         $path = $this->getPath();
         if (!file_exists($path)) {
             $errorMessage = sprintf('%s is not a valid view file.', $path);

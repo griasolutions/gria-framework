@@ -20,9 +20,8 @@ interface ConfigInterface
      * Returns the value associated with the provided key.
      *
      * @param $key
-     * @param null $default
      * @return mixed
      */
-    public function get($key, $default = null);
+    public function get($key);
 
 }

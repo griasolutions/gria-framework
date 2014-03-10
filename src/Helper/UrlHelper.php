@@ -6,16 +6,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\View;
+namespace Gria\Helper;
 
-use \Gria\Helper;
 
-class PartialHelper extends Helper\HelperAbstract
+class UrlHelper 
 {
-
-    public function load($path)
-    {
-        include $path;
-    }
 
 } 

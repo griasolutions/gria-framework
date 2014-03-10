@@ -9,33 +9,15 @@
 namespace GriaTest\Integration\Application;
 
 use \Gria\Application;
-use \Gria\Config;
+use \Gria\Test;
 
 /**
  * Tests {@link \Gria\Application\Application}.
  *
  * @package GriaTest\Integration\Application
  */
-class ApplicationTest extends \PHPUnit_Framework_TestCase
+class ApplicationTest extends Test\IntegrationTestAbstract
 {
-
-    /** @var \Gria\Application\Application */
-    private $_application;
-
-    /**
-     * @inheritdoc
-     */
-    public function setUp()
-    {
-        $this->getMock('\IniParser', array('parse'))
-            ->expects($this->any())
-            ->method('parse')
-            ->will($this->returnValue(array(
-                    'name' => 'Test Application'
-                )
-            ));
-        $this->_application = new Application\Application(new Config\Config('example.ini'));
-    }
 
     /**
      * Tests {@link \Gria\Application\Application::isValidEnvironment()}.
@@ -61,7 +43,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      */
     public function getApplication()
     {
-        return $this->_application;
+        $this->_application = new Application\Application($this->getMockConfig());
     }
 
 }

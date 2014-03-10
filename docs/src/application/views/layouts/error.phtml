@@ -1,4 +1,4 @@
-<?php echo $this->renderPartial('header'); ?>
+<?php $this->loadPartial('header'); ?>
 
 <h1>Error</h1>
 <p>Look at the mess you made! Somehow something went wrong.</p>
@@ -9,5 +9,5 @@
 <p><?php echo $this->get('exception')->getTraceAsString(); ?></p>
 <?php //endif; ?>
 
-<?php echo $this->renderPartial('footer'); ?>
+<?php $this->loadPartial('footer'); ?>
 

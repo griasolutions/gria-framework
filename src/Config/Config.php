@@ -8,7 +8,9 @@
 
 namespace Gria\Config;
 
-class Config implements ConfigInterface
+use \Gria\Common;
+
+class Config extends Common\Registry implements ConfigInterface
 {
 
     /** @var string */
@@ -17,65 +19,23 @@ class Config implements ConfigInterface
     /** @var array */
     private $_rawData = [];
 
-    /** @var array */
-    private $_data = [];
-
     /**
      * Constructor.
      *
      * @param string $path
      */
-    public function __construct($path = '')
+    public function __construct($path)
     {
-        if ($path) {
-            $this->setPath(realpath($path));
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function get($key, $default = null)
-    {
-        $data = $this->getData();
-        if (array_key_exists($key, $data)) {
-            return $data[$key];
-        }
-        return $default;
-    }
-
-    /**
-     * Retrieves all of the parsed configuration data.
-     *
-     * @return array
-     */
-    public function getData()
-    {
-        if (!$this->_data) {
-            $data = $this->getRawData();
-            foreach ($data as $environment => $settings) {
-                if (GRIA_ENV == trim($environment)) {
-                    $this->_data = $settings;
-                    break;
+        $this->setPath(realpath($path));
+        $rawData = (new \IniParser($this->getPath()))->parse();
+        foreach ($rawData as $environment => $settings) {
+            if (GRIA_ENV == trim($environment)) {
+                foreach ($settings as $key => $value) {
+                    $this->set($key, $value);
                 }
+                break;
             }
         }
-
-        return $this->_data;
-    }
-
-    /**
-     * Retrieves all of the raw configuration data.
-     *
-     * @return array
-     */
-    public function getRawData()
-    {
-        if (!isset($this->_rawData)) {
-            $this->_rawData = (new \IniParser($this->getPath()))->parse();
-        }
-
-        return $this->_rawData;
     }
 
     /**

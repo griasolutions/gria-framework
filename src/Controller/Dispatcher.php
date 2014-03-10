@@ -61,7 +61,7 @@ class Dispatcher
     public function getController($controllerName, \Exception $exception = null)
     {
         $config = $this->getConfig();
-        $namespace = $config->get('namespace') ? : 'Application';
+        $namespace = $config->get('namespace') ?: 'Application';
         $controllerClassName = '\\' . $namespace . '\Controller\\' . ucfirst($controllerName);
         try {
             $reflectionClass = new \ReflectionClass($controllerClassName);

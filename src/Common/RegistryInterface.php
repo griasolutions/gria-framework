@@ -24,4 +24,11 @@ interface RegistryInterface extends \ArrayAccess
      */
     public function encodeOffset($offset);
 
+    /**
+     * Returns the registry.
+     *
+     * @return array
+     */
+    public function getRegistry();
+
 } 

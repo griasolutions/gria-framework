@@ -134,4 +134,12 @@ class Registry implements RegistryInterface
         return $offset;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getRegistry()
+    {
+        return $this->_registry;
+    }
+
 } 
