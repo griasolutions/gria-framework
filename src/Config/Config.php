@@ -16,9 +16,6 @@ class Config extends Common\Registry implements ConfigInterface
     /** @var string */
     private $_path;
 
-    /** @var array */
-    private $_rawData = [];
-
     /**
      * Constructor.
      *
@@ -26,16 +23,7 @@ class Config extends Common\Registry implements ConfigInterface
      */
     public function __construct($path)
     {
-        $this->setPath(realpath($path));
-        $rawData = (new \IniParser($this->getPath()))->parse();
-        foreach ($rawData as $environment => $settings) {
-            if (GRIA_ENV == trim($environment)) {
-                foreach ($settings as $key => $value) {
-                    $this->set($key, $value);
-                }
-                break;
-            }
-        }
+        $this->setPath($path);
     }
 
     /**
@@ -46,7 +34,16 @@ class Config extends Common\Registry implements ConfigInterface
      */
     public function setPath($path)
     {
-        $this->_path = $path;
+        $this->_path = realpath($path);
+        $rawData = (new \IniParser($this->_path))->parse();
+        foreach ($rawData as $environment => $settings) {
+            if (GRIA_ENV == trim($environment)) {
+                foreach ($settings as $key => $value) {
+                    $this->set($key, $value);
+                }
+                break;
+            }
+        }
         return $this;
     }
 

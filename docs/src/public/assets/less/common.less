@@ -2,6 +2,47 @@ body, input, textarea, button, select {
   font-family: @content-font-family;
 }
 
-footer {
+body {
+  border-top: 5px solid #555;
+  padding: 1px 0 20px;
+}
+
+.navbar {
+  background: transparent;
+  border: 0;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.navbar .navbar-nav li a {
+  color: #aaa;
+}
+
+.navbar .navbar-nav >.active > a {
+  background: transparent;
+  color: #222;
+}
+
+.navbar-brand {
+  font-family: @title-font-family;
+}
+
+.footer {
+  border-top: 1px solid #eee;
+  padding-bottom: 40px;
+  padding-top: 40px;
+  margin-top: 10px;
   text-align: center;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .masthead,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }

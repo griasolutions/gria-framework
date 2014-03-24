@@ -50,9 +50,9 @@ class Manager
     private function _createHelper($name)
     {
         $namespaces = array($this->getConfig()->get('namespace') ?: 'Application', 'Gria');
-        $classNameFormat = '\%s\Helper\%s';
+        $classNameFormat = '\%s\Helper\%sHelper';
         foreach ($namespaces as $namespace) {
-            $className = sprintf($classNameFormat, $namespace, $name);
+            $className = sprintf($classNameFormat, $namespace, ucwords($name));
             if (class_exists($className)) {
                 $helper = new $className($this->getConfig());
                 return $helper;

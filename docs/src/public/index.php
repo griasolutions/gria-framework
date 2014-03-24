@@ -1,24 +1,15 @@
 <?php
+/**
+ * This file is part of the Gria Framework package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-// timezone
-date_default_timezone_set('America/New_York');
+define('GRIA_ENV', 'development');
 
-// define the application environment
-defined('GRIA_ENV') || define('GRIA_ENV', 'production');
+if (php_sapi_name() !== 'cli-server' || file_exists(__DIR__ . '/public/' . $_SERVER['REQUEST_URI'])) {
+    return false;
+}
 
-// define the path to the files
-define('GRIA_PATH', dirname(dirname(dirname(__FILE__))));
-
-// set the include path
-set_include_path(implode(PATH_SEPARATOR, array(
-    get_include_path(),
-    GRIA_PATH,
-    dirname(GRIA_PATH)
-)));
-
-// pull in composer dependencies from the framework
-require 'vendor/autoload.php';
-
-// run the application
-$path = GRIA_PATH . '/config/application.ini';
-(new \Gria\Application\Application(new \Gria\Config\Config($path)))->run();
+require dirname(__DIR__) . '/bootstrap.php';

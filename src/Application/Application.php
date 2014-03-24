@@ -8,21 +8,17 @@
 
 namespace Gria\Application;
 
-use \Gria\Config;
-use \Gria\Http;
 use \Gria\Controller;
-use \Gria\Helper;
 
 /**
- * Performs initial checks and kicks off the MVC application. If any problems bubble up to this level, we simply stop
- * script execution and tell the user what is going on.
+ * Performs initial checks and kicks off the MVC application. If any problems
+ * bubble up to this level, we simply stop script execution and tell the user
+ * what is going on.
  *
  * @package Gria\Application
  */
 class Application
 {
-
-    use Config\ConfigAwareTrait;
 
     /** @var \Gria\Controller\Dispatcher */
     private $_controllerDispatcher;
@@ -30,25 +26,11 @@ class Application
     /**
      * Constructor
      *
-     * @param \Gria\Config\ConfigInterface $config
+     * @param \Gria\Controller\DispatcherInterface $controllerDispatcher
      */
-    public function __construct(Config\ConfigInterface $config)
+    public function __construct(Controller\DispatcherInterface $controllerDispatcher)
     {
-        if ($this->isValidEnvironment()) {
-            $this->setConfig($config);
-        }
-    }
-
-    /**
-     * Determines whether or not the environment is valid
-     *
-     * @return boolean
-     */
-    public function isValidEnvironment()
-    {
-        defined('GRIA_ENV') || die('No application environment defined!');
-
-        return true;
+        $this->setControllerDispatcher($controllerDispatcher);
     }
 
     /**
@@ -66,19 +48,22 @@ class Application
     }
 
     /**
-     * Retrieves an instance of the controller dispatcher
+     * Registers an instance of the controller dispatcher with this object.
      *
-     * @return \Gria\Controller\Dispatcher
+     * @param \Gria\Controller\DispatcherInterface $controllerDispatcher
+     */
+    public function setControllerDispatcher(Controller\DispatcherInterface $controllerDispatcher)
+    {
+        $this->_controllerDispatcher = $controllerDispatcher;
+    }
+
+    /**
+     * Retrieves an instance of the controller dispatcher.
+     *
+     * @return \Gria\Controller\DispatcherInterface
      */
     public function getControllerDispatcher()
     {
-        if (!$this->_controllerDispatcher) {
-            $config = $this->getConfig();
-            $request = new Controller\Request();
-            $helperManager = new Helper\Manager($config);
-            $this->_controllerDispatcher = new Controller\Dispatcher($config, $request, $helperManager);
-        }
-
         return $this->_controllerDispatcher;
     }
 

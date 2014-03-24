@@ -12,7 +12,12 @@ use \Gria\Config;
 use \Gria\Http;
 use \Gria\Helper;
 
-class Dispatcher
+/**
+ * Dispatches requests to controllers.
+ *
+ * @package Gria\Controller
+ */
+class Dispatcher implements DispatcherInterface
 {
 
     use Config\ConfigAwareTrait, Http\RequestAwareTrait, Helper\HelperManagerAwareTrait;
@@ -30,7 +35,7 @@ class Dispatcher
     }
 
     /**
-     * @return void
+     * @inheritdoc
      */
     public function run()
     {
@@ -53,9 +58,7 @@ class Dispatcher
     }
 
     /**
-     * @param string $controllerName
-     * @param \Exception $exception
-     * @return \Gria\Controller\ControllerInterface
+     * @inheritdoc
      * @throws \Gria\Controller\InvalidControllerException
      */
     public function getController($controllerName, \Exception $exception = null)

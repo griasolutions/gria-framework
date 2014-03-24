@@ -1,19 +1,36 @@
 @import "../lib/bootstrap/bootstrap.min.css";
-@import "../lib/bootstrap/bootstrap-theme.min.css";
 @import "../lib/font-awesome/css/font-awesome.min.css";
 @import "fonts.less";
 @import "common.less";
 
 .jumbotron {
 
+  background-color: transparent;
+  text-align: center;
+
   h1 {
-    font-family: Raleway, sans-serif;
-    font-size: 7em;
+    color: #777;
+    font-family: @title-font-family;
+    font-size: 4em;
+    font-weight: 100;
+    margin-bottom: 1em;
+  }
+
+  strong {
+    color: #333;
     font-weight: 100;
   }
 
   p {
     font-size: 2em;
+  }
+
+  .btn {
+    font-size: 1.25em;
+    font-weight: bold;
+    letter-spacing: 1;
+    padding: 14px 24px;
+    text-transform: uppercase;
   }
 
 }
