@@ -8,7 +8,7 @@
 
 namespace Gria\Helper;
 
-class HtmlHelper extends HelperAbstract
+class Html extends HelperAbstract
 {
 
     public function createAnchorElement(array $params)

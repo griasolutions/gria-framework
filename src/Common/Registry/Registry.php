@@ -6,12 +6,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Common;
+namespace Gria\Common\Registry;
 
 /**
  * Concrete implementation of the {@link \Gria\Common\RegistryInterface}.
  *
- * @package Gria\Common
+ * @package Gria\Common\Registry
  */
 class Registry implements RegistryInterface
 {

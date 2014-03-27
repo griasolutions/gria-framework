@@ -6,14 +6,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Common;
+namespace Gria\Common\Exception;
 
 /**
  * Base exception class for the framework. Extends {@link \Exception}.
  *
- * @package Gria\Common
+ * @package Gria\Common\Exception
  */
-class Exception extends \Exception
+class Exception extends \Exception implements ExceptionInterface
 {
 
     /**

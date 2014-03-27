@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Common;
+namespace Gria\Common\Registry;
 
 /**
  * Defines the API for classes that are aware of instances of the {@link \Gria\Common\RegistryInterface} interface.
@@ -22,8 +22,8 @@ trait RegistryAwareTrait
     /**
      * Registers the provided {@link \Gria\Common\RegistryInterface} with this class.
      *
-     * @param \Gria\Common\RegistryInterface $registry
-     * @return \Gria\Common\RegistryAwareTrait
+     * @param \Gria\Common\Registry\RegistryInterface $registry
+     * @return \Gria\Common\Registry\RegistryAwareTrait
      */
     public function setRegistry(RegistryInterface $registry)
     {

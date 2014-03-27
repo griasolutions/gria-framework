@@ -21,7 +21,7 @@ class Application
 {
 
     /** @var \Gria\Controller\Dispatcher */
-    private $_controllerDispatcher;
+    private $controllerDispatcher;
 
     /**
      * Constructor
@@ -54,7 +54,7 @@ class Application
      */
     public function setControllerDispatcher(Controller\DispatcherInterface $controllerDispatcher)
     {
-        $this->_controllerDispatcher = $controllerDispatcher;
+        $this->controllerDispatcher = $controllerDispatcher;
     }
 
     /**
@@ -64,7 +64,7 @@ class Application
      */
     public function getControllerDispatcher()
     {
-        return $this->_controllerDispatcher;
+        return $this->controllerDispatcher;
     }
 
 }

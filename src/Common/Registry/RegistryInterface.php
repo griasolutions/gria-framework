@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Common;
+namespace Gria\Common\Registry;
 
 /**
  * Defines the API for {@link \Gria\Common\Registry} classes. Extends {@link \ArrayAccess}.
