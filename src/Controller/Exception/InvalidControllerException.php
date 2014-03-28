@@ -6,11 +6,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Controller;
+namespace Gria\Controller\Exception;
 
 use \Gria\Common;
 
-class InvalidControllerException extends Common\Exception
+class InvalidControllerException extends Common\Exception\Exception
 {
 
     /**

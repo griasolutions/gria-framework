@@ -15,6 +15,6 @@ use \Gria\Common;
  *
  * @package Gria\Common
  */
-class InvalidConfigException extends Common\Exception
+class InvalidConfigException extends Common\Exception\Exception
 {
-} 
+}

@@ -15,10 +15,10 @@ class ActionController extends ControllerAbstract
 {
 
     /** @var \Gria\View\View */
-    private $_view;
+    private $view;
 
     /** @var bool */
-    private $_enableView = true;
+    private $enableView = true;
 
     /**
      * @inheritdoc
@@ -35,7 +35,7 @@ class ActionController extends ControllerAbstract
     {
         $actionMethodName = $action . 'Action';
         if (!method_exists($this, $actionMethodName)) {
-            throw new InvalidActionException(sprintf('%s is not a valid action', $action));
+            throw new Exception\InvalidActionException(sprintf('%s is not a valid action', $action));
         }
         $this->$actionMethodName();
     }
@@ -69,7 +69,7 @@ class ActionController extends ControllerAbstract
      */
     public function enableView()
     {
-        $this->_enableView = true;
+        $this->enableView = true;
     }
 
     /**
@@ -79,7 +79,7 @@ class ActionController extends ControllerAbstract
      */
     public function disableView()
     {
-        $this->_enableView = false;
+        $this->enableView = false;
     }
 
     /**
@@ -89,7 +89,7 @@ class ActionController extends ControllerAbstract
      */
     public function isViewEnabled()
     {
-        return $this->_enableView;
+        return $this->enableView;
     }
 
     /**
@@ -100,7 +100,7 @@ class ActionController extends ControllerAbstract
      */
     public function setView(View\View $view)
     {
-        $this->_view = $view;
+        $this->view = $view;
         return $this;
     }
 
@@ -111,7 +111,7 @@ class ActionController extends ControllerAbstract
      */
     public function getView()
     {
-        return $this->_view;
+        return $this->view;
     }
 
 }

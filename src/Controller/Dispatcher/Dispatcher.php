@@ -6,8 +6,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Controller;
+namespace Gria\Controller\Dispatcher;
 
+use \Gria\Controller;
 use \Gria\Config;
 use \Gria\Http;
 use \Gria\Helper;
@@ -27,7 +28,7 @@ class Dispatcher implements DispatcherInterface
      * @param \Gria\Controller\Request $request
      * @param \Gria\Helper\Manager $helperManager
      */
-    public function __construct(Config\ConfigInterface $config, Request $request, Helper\Manager $helperManager)
+    public function __construct(Config\ConfigInterface $config, Controller\Request $request, Helper\Manager $helperManager)
     {
         $this->setConfig($config);
         $this->setRequest($request);
@@ -59,7 +60,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      * @inheritdoc
-     * @throws \Gria\Controller\InvalidControllerException
+     * @throws \Gria\Controller\Exception\InvalidControllerException
      */
     public function getController($controllerName, \Exception $exception = null)
     {
@@ -80,7 +81,7 @@ class Dispatcher implements DispatcherInterface
             } else {
                 $errorMessage = sprintf('Could not find the %s controller', $controllerName);
             }
-            throw new InvalidControllerException($errorMessage);
+            throw new Controller\Exception\InvalidControllerException($errorMessage);
         }
     }
 

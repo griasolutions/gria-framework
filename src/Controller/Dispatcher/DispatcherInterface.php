@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Controller;
+namespace Gria\Controller\Dispatcher;
 
 /**
  * Interface defining methods used to dispatch requests to controllers.

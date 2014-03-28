@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Controller;
+namespace Gria\Controller\Exception;
 
 class InvalidActionException extends InvalidControllerException
 {

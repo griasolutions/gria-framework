@@ -19,21 +19,21 @@ abstract class ControllerAbstract implements ControllerInterface
     use Http\RequestAwareTrait, Config\ConfigAwareTrait, Helper\HelperManagerAwareTrait;
 
     /** @var string */
-    private $_name;
+    private $name;
 
     /** @var \Gria\Http\ResponseInterface */
-    private $_response;
+    private $response;
 
     /**
      * @inheritdoc
      */
     public function __construct(Request $request, Config\ConfigInterface $config, Helper\Manager $helperManager)
     {
-        $this->_name = substr(strtolower(str_replace(__NAMESPACE__, '', get_class($this))), 1);
+        $this->name = substr(strtolower(str_replace(__NAMESPACE__, '', get_class($this))), 1);
         $this->setRequest($request);
         $this->setConfig($config);
         $this->setHelperManager($helperManager);
-        $this->_response = new Http\Response();
+        $this->response = new Http\Response();
         $this->init();
     }
 
@@ -42,7 +42,7 @@ abstract class ControllerAbstract implements ControllerInterface
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -58,7 +58,7 @@ abstract class ControllerAbstract implements ControllerInterface
      */
     public function getResponse()
     {
-        return $this->_response;
+        return $this->response;
     }
 
 }

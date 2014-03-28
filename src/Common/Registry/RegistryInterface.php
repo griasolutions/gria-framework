@@ -9,9 +9,9 @@
 namespace Gria\Common\Registry;
 
 /**
- * Defines the API for {@link \Gria\Common\Registry} classes. Extends {@link \ArrayAccess}.
+ * Defines the API for {@link \Gria\Common\Registry\Registry} classes. Extends {@link \ArrayAccess}.
  *
- * @package Gria\Common
+ * @package Gria\Common\Registry
  */
 interface RegistryInterface extends \ArrayAccess
 {

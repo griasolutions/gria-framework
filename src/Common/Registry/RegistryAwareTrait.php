@@ -11,34 +11,34 @@ namespace Gria\Common\Registry;
 /**
  * Defines the API for classes that are aware of instances of the {@link \Gria\Common\RegistryInterface} interface.
  *
- * @package Gria\Common
+ * @package Gria\Common\Registry
  */
 trait RegistryAwareTrait
 {
 
-    /** @var \Gria\Common\RegistryInterface */
-    private $_registry;
+    /** @var \Gria\Common\Registry\RegistryInterface */
+    private $registry;
 
     /**
-     * Registers the provided {@link \Gria\Common\RegistryInterface} with this class.
+     * Registers the provided {@link \Gria\Common\Registry\RegistryInterface} with this class.
      *
      * @param \Gria\Common\Registry\RegistryInterface $registry
      * @return \Gria\Common\Registry\RegistryAwareTrait
      */
     public function setRegistry(RegistryInterface $registry)
     {
-        $this->_registry = $registry;
+        $this->registry = $registry;
         return $this;
     }
 
     /**
-     * Returns the instance of {@link \Gria\Common\RegistryInterface} registered with this class.
+     * Returns the instance of {@link \Gria\Common\Registry\RegistryInterface} registered with this class.
      *
-     * @return \Gria\Common\RegistryInterface $registry
+     * @return \Gria\Common\Registry\RegistryInterface $registry
      */
     public function getRegistry()
     {
-        return $this->_registry;
+        return $this->registry;
     }
 
 }

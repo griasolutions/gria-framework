@@ -17,7 +17,7 @@ trait ConfigAwareTrait
 {
 
     /** @var \Gria\Config\Config * */
-    private $_config;
+    private $config;
 
     /**
      * Registers the provided {@link \Gria\Config\ConfigInterface} with this class.
@@ -27,7 +27,7 @@ trait ConfigAwareTrait
      */
     public function setConfig(ConfigInterface $config)
     {
-        $this->_config = $config;
+        $this->config = $config;
         return $this;
     }
 
@@ -38,7 +38,7 @@ trait ConfigAwareTrait
      */
     public function getConfig()
     {
-        return $this->_config;
+        return $this->config;
     }
 
 }

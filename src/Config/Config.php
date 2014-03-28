@@ -10,11 +10,11 @@ namespace Gria\Config;
 
 use \Gria\Common;
 
-class Config extends Common\Registry implements ConfigInterface
+class Config extends Common\Registry\Registry implements ConfigInterface
 {
 
     /** @var string */
-    private $_path;
+    private $path;
 
     /**
      * Constructor.
@@ -34,8 +34,8 @@ class Config extends Common\Registry implements ConfigInterface
      */
     public function setPath($path)
     {
-        $this->_path = realpath($path);
-        $rawData = (new \IniParser($this->_path))->parse();
+        $this->path = realpath($path);
+        $rawData = (new \IniParser($this->path))->parse();
         foreach ($rawData as $environment => $settings) {
             if (GRIA_ENV == trim($environment)) {
                 foreach ($settings as $key => $value) {
@@ -54,7 +54,7 @@ class Config extends Common\Registry implements ConfigInterface
      */
     public function getPath()
     {
-        return $this->_path;
+        return $this->path;
     }
 
 }

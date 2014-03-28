@@ -47,7 +47,7 @@ interface ControllerInterface
      *
      * @param string $action
      * @return void
-     * @throws \Gria\Controller\InvalidActionException
+     * @throws \Gria\Controller\Exception\InvalidActionException
      */
     public function dispatch($action);
 

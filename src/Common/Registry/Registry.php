@@ -17,7 +17,7 @@ class Registry implements RegistryInterface
 {
 
     /** @var array */
-    private $_registry = [];
+    private $registry = [];
 
     /**
      * Constructor.
@@ -82,7 +82,7 @@ class Registry implements RegistryInterface
     {
         $encodedOffset = $this->encodeOffset($offset);
 
-        return isset($this->_registry[$encodedOffset]);
+        return isset($this->registry[$encodedOffset]);
     }
 
     /**
@@ -95,7 +95,7 @@ class Registry implements RegistryInterface
     {
         $encodedOffset = $this->encodeOffset($offset);
         if ($this->offsetExists($encodedOffset)) {
-            return $this->_registry[$encodedOffset];
+            return $this->registry[$encodedOffset];
         }
     }
 
@@ -109,7 +109,7 @@ class Registry implements RegistryInterface
     public function offsetSet($offset, $value)
     {
         $encodedOffset = $this->encodeOffset($offset);
-        $this->_registry[$encodedOffset] = $value;
+        $this->registry[$encodedOffset] = $value;
         return $this;
     }
 
@@ -122,7 +122,7 @@ class Registry implements RegistryInterface
     public function offsetUnset($offset)
     {
         $encodedOffset = $this->encodeOffset($offset);
-        unset($this->_registry[$encodedOffset]);
+        unset($this->registry[$encodedOffset]);
         return $this;
     }
 
@@ -139,7 +139,7 @@ class Registry implements RegistryInterface
      */
     public function getRegistry()
     {
-        return $this->_registry;
+        return $this->registry;
     }
 
 } 
