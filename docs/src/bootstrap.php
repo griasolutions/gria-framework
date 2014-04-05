@@ -32,9 +32,10 @@ if (GRIA_ENV == 'development') {
 
 // run the application
 call_user_func(function(){
-    $config = new \Gria\Config\Config(GRIA_PATH . '/config/application.ini');
-    $request = new \Gria\Controller\Request();
-    $helperManager = new \Gria\Helper\Manager($config);
-    $controllerDispatcher = new \Gria\Controller\Dispatcher($config, $request, $helperManager);
+    $environment = new \Gria\Application\Environment\Environment();
+    $config = new \Gria\Config\Config(GRIA_PATH . '/config/application.ini', $environment);
+    $request = new \Gria\Controller\Request\Request();
+    $helperManager = new \Gria\Helper\Manager\Manager($config);
+    $controllerDispatcher = new \Gria\Controller\Dispatcher\Dispatcher($config, $request, $helperManager);
     (new \Gria\Application\Application($controllerDispatcher))->run();
 });

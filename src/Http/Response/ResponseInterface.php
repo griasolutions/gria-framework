@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Http;
+namespace Gria\Http\Response;
 
 interface ResponseInterface
 {
@@ -23,7 +23,7 @@ interface ResponseInterface
 
     /**
      * @param int $statusCode
-     * @return \Gria\Http\ResponseInterface
+     * @return \Gria\Http\Response\ResponseInterface
      */
     public function setStatusCode($statusCode);
 
@@ -34,13 +34,13 @@ interface ResponseInterface
 
     /**
      * @param string $contentType
-     * @return \Gria\Http\ResponseInterface
+     * @return \Gria\Http\Response\ResponseInterface
      */
     public function setContentType($contentType);
 
     /**
      * @param string $body
-     * @return \Gria\Http\ResponseInterface
+     * @return \Gria\Http\Response\ResponseInterface
      */
     public function setBody($body);
 

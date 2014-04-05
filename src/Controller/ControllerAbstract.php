@@ -21,7 +21,7 @@ abstract class ControllerAbstract implements ControllerInterface
     /** @var string */
     private $name;
 
-    /** @var \Gria\Http\ResponseInterface */
+    /** @var \Gria\Http\Response\ResponseInterface */
     private $response;
 
     /**

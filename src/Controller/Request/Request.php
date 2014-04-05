@@ -6,18 +6,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Controller;
+namespace Gria\Controller\Request;
 
 use \Gria\Http;
 
-class Request extends Http\Request
+class Request extends Http\Request\Request implements RequestInterface
 {
 
     /** @var array */
-    private $_put;
+    private $put;
 
     /** @var array */
-    private $_delete;
+    private $delete;
 
     /**
      * @inheritdoc
@@ -30,15 +30,15 @@ class Request extends Http\Request
         if ($this->getContentType() == 'application/x-www-form-urlencoded' && ($this->isPut() || $this->isDelete())) {
             $data = file_get_contents('php://input');
             if ($this->isPut()) {
-                parse_str($data, $this->_put);
+                parse_str($data, $this->put);
             } else {
-                parse_str($data, $this->_delete);
+                parse_str($data, $this->delete);
             }
         }
     }
 
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function isGet()
     {
@@ -46,7 +46,7 @@ class Request extends Http\Request
     }
 
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function isPost()
     {
@@ -54,7 +54,7 @@ class Request extends Http\Request
     }
 
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function isPut()
     {
@@ -62,7 +62,7 @@ class Request extends Http\Request
     }
 
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function isDelete()
     {
@@ -70,8 +70,7 @@ class Request extends Http\Request
     }
 
     /**
-     * @param $param
-     * @return mixed
+     * @inheritdoc
      */
     public function getGet($param)
     {
@@ -79,8 +78,7 @@ class Request extends Http\Request
     }
 
     /**
-     * @param $param
-     * @return mixed
+     * @inheritdoc
      */
     public function getPost($param)
     {
@@ -88,30 +86,27 @@ class Request extends Http\Request
     }
 
     /**
-     * @param $param
-     * @return mixed
+     * @inheritdoc
      */
     public function getPut($param)
     {
-        if (isset($this->_put[$param])) {
-            return filter_var($this->_put[$param]);
+        if (isset($this->put[$param])) {
+            return filter_var($this->put[$param]);
         }
     }
 
     /**
-     * @param $param
-     * @return mixed
+     * @inheritdoc
      */
     public function getDelete($param)
     {
-        if (isset($this->_delete[$param])) {
-            return filter_var($this->_delete[$param]);
+        if (isset($this->delete[$param])) {
+            return filter_var($this->delete[$param]);
         }
     }
 
     /**
-     * @param $param
-     * @return mixed
+     * @inheritdoc
      */
     public function getServer($param)
     {
@@ -119,8 +114,7 @@ class Request extends Http\Request
     }
 
     /**
-     * @param $param
-     * @return mixed
+     * @inheritdoc
      */
     public function getEnv($param)
     {
@@ -128,7 +122,7 @@ class Request extends Http\Request
     }
 
     /**
-     * @return mixed
+     * @inheritdoc
      */
     public function getContentType()
     {

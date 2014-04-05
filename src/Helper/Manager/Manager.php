@@ -6,27 +6,33 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Helper;
+namespace Gria\Helper\Manager;
 
 use \Gria\Common;
 use \Gria\Config;
+use \Gria\Helper;
 
-class Manager
+class Manager implements ManagerInterface
 {
 
-    use Config\ConfigAwareTrait, Common\RegistryAwareTrait;
+    use Config\ConfigAwareTrait, Common\Registry\RegistryAwareTrait;
 
     /**
      * @param \Gria\Config\ConfigInterface $config
      */
     public function __construct(Config\ConfigInterface $config)
     {
-        $this->setConfig($config)->setRegistry(new Registry());
+        $this->setConfig($config)->setRegistry(new Helper\Registry());
+    }
+
+    public function update(Helper\HelperInterface $helper)
+    {
+
     }
 
     /**
+     * @throws \Gria\Helper\Exception\InvalidHelperException
      * @param string $name
-     * @throws InvalidHelperException
      * @return \Gria\Helper\HelperInterface
      */
     public function getHelper($name)
@@ -40,7 +46,7 @@ class Manager
 
             return $helper;
         }
-        throw new InvalidHelperException(sprintf('%s is an invalid helper', $name));
+        throw new Helper\Exception\InvalidHelperException(sprintf('%s is an invalid helper', $name));
     }
 
     /**

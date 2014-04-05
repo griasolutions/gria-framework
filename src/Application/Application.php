@@ -14,21 +14,19 @@ use \Gria\Controller;
  * Performs initial checks and kicks off the MVC application. If any problems
  * bubble up to this level, we simply stop script execution and tell the user
  * what is going on.
- *
- * @package Gria\Application
  */
 class Application
 {
 
-    /** @var \Gria\Controller\Dispatcher */
+    /** @var \Gria\Controller\Dispatcher\DispatcherInterface */
     private $controllerDispatcher;
 
     /**
      * Constructor
      *
-     * @param \Gria\Controller\DispatcherInterface $controllerDispatcher
+     * @param \Gria\Controller\Dispatcher\DispatcherInterface $controllerDispatcher
      */
-    public function __construct(Controller\DispatcherInterface $controllerDispatcher)
+    public function __construct(Controller\Dispatcher\DispatcherInterface $controllerDispatcher)
     {
         $this->setControllerDispatcher($controllerDispatcher);
     }
@@ -50,9 +48,9 @@ class Application
     /**
      * Registers an instance of the controller dispatcher with this object.
      *
-     * @param \Gria\Controller\DispatcherInterface $controllerDispatcher
+     * @param \Gria\Controller\Dispatcher\DispatcherInterface $controllerDispatcher
      */
-    public function setControllerDispatcher(Controller\DispatcherInterface $controllerDispatcher)
+    public function setControllerDispatcher(Controller\Dispatcher\DispatcherInterface $controllerDispatcher)
     {
         $this->controllerDispatcher = $controllerDispatcher;
     }
@@ -60,7 +58,7 @@ class Application
     /**
      * Retrieves an instance of the controller dispatcher.
      *
-     * @return \Gria\Controller\DispatcherInterface
+     * @return \Gria\Controller\Dispatcher\DispatcherInterface
      */
     public function getControllerDispatcher()
     {

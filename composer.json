@@ -5,6 +5,7 @@
 		"austinhyde/iniparser": "@dev",
 		"icanboogie/inflector": "dev-master",
 		"phpunit/phpunit": ">=3.7",
+        "mikey179/vfsStream": "@dev",
 		"symfony/yaml": "2.*"
 	},
 	"require-dev": {

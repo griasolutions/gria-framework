@@ -22,11 +22,11 @@ interface ControllerInterface
     /**
      * Constructor.
      *
-     * @param \Gria\Controller\Request $request
+     * @param \Gria\Controller\Request\RequestInterface $request
      * @param \Gria\Config\ConfigInterface $config
      * @param \Gria\Helper\Manager $helperManager
      */
-    public function __construct(Request $request, Config\ConfigInterface $config, Helper\Manager $helperManager);
+    public function __construct(Request\RequestInterface $request, Config\ConfigInterface $config, Helper\Manager $helperManager);
 
     /**
      * Returns the name of the controller.
@@ -52,7 +52,7 @@ interface ControllerInterface
     public function dispatch($action);
 
     /**
-     * Captures any output generated and registers it with the {@link \Gria\Http\ResponseInterface} object.
+     * Captures any output generated and registers it with the {@link \Gria\Http\Response\ResponseInterface} object.
      *
      * @return void
      */
@@ -66,9 +66,9 @@ interface ControllerInterface
     public function respond();
 
     /**
-     * Returns the {@link \Gria\Http\ResponseInterface} response.
+     * Returns the {@link \Gria\Http\Response\ResponseInterface} response.
      *
-     * @return \Gria\Http\ResponseInterface
+     * @return \Gria\Http\Response\ResponseInterface
      */
     public function getResponse();
 

@@ -135,7 +135,7 @@ class ActionControllerTest extends Test\ControllerTest
         $controller->dispatch('index');
         $controller->render();
         $response = $controller->getResponse();
-        $this->assertInstanceOf('\Gria\Http\ResponseInterface', $response);
+        $this->assertInstanceOf('\Gria\Http\Response\ResponseInterface', $response);
         $this->assertEquals(200, $response->getStatusCode());
     }
 

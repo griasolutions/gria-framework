@@ -8,11 +8,6 @@
 
 namespace Gria\Common\Registry;
 
-/**
- * Concrete implementation of the {@link \Gria\Common\RegistryInterface}.
- *
- * @package Gria\Common\Registry
- */
 class Registry implements RegistryInterface
 {
 
@@ -32,9 +27,7 @@ class Registry implements RegistryInterface
     }
 
     /**
-     * @see \Gria\Common\Registry::has()
-     * @param $offset
-     * @return bool
+     * @inheritdoc
      */
     public function has($offset)
     {
@@ -42,9 +35,7 @@ class Registry implements RegistryInterface
     }
 
     /**
-     * @see \Gria\Common\Registry::get()
-     * @param $offset
-     * @return mixed
+     * @inheritdoc
      */
     public function get($offset)
     {
@@ -52,10 +43,7 @@ class Registry implements RegistryInterface
     }
 
     /**
-     * @see \Gria\Common\Registry::set()
-     * @param string $offset
-     * @param mixed $value
-     * @return \Gria\Common\Registry
+     * @inheritdoc
      */
     public function set($offset, $value)
     {
@@ -63,9 +51,7 @@ class Registry implements RegistryInterface
     }
 
     /**
-     * @see \Gria\Common\Registry::has()
-     * @param $offset
-     * @return bool
+     * @inheritdoc
      */
     public function remove($offset)
     {
@@ -81,7 +67,6 @@ class Registry implements RegistryInterface
     public function offsetExists($offset)
     {
         $encodedOffset = $this->encodeOffset($offset);
-
         return isset($this->registry[$encodedOffset]);
     }
 
@@ -104,7 +89,7 @@ class Registry implements RegistryInterface
      *
      * @param mixed $offset
      * @param mixed $value
-     * @return \Gria\Common\Registry
+     * @return \Gria\Common\Registry\RegistryInterface
      */
     public function offsetSet($offset, $value)
     {
@@ -117,7 +102,7 @@ class Registry implements RegistryInterface
      * Un-registers an offset and the associated value with the class.
      *
      * @param mixed $offset
-     * @return \Gria\Common\Registry
+     * @return \Gria\Common\Registry\RegistryInterface
      */
     public function offsetUnset($offset)
     {
@@ -142,4 +127,4 @@ class Registry implements RegistryInterface
         return $this->registry;
     }
 
-} 
+}

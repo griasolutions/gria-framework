@@ -6,13 +6,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Helper;
+namespace Gria\Helper\Manager;
 
 trait HelperManagerAwareTrait
 {
 
-    /** @var \Gria\Helper\Manager */
-    private $_helperManager;
+    /** @var \Gria\Helper\Manager\ManagerInterface */
+    private $helperManager;
 
     /**
      * @param string $key
@@ -24,22 +24,22 @@ trait HelperManagerAwareTrait
     }
 
     /**
-     * @param Manager $helperManager
+     * @param \Gria\Helper\Manager\ManagerInterface $helperManager
      * @return $this
      */
-    public function setHelperManager(Manager $helperManager)
+    public function setHelperManager(ManagerInterface $helperManager)
     {
-        $this->_helperManager = $helperManager;
+        $this->helperManager = $helperManager;
 
         return $this;
     }
 
     /**
-     * @return \Gria\Helper\Manager
+     * @return \Gria\Helper\Manager\ManagerInterface
      */
     public function getHelperManager()
     {
-        return $this->_helperManager;
+        return $this->helperManager;
     }
 
 } 

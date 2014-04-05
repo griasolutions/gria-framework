@@ -16,7 +16,7 @@ namespace Gria\Config;
 trait ConfigAwareTrait
 {
 
-    /** @var \Gria\Config\Config * */
+    /** @var \Gria\Config\ConfigInterface * */
     private $config;
 
     /**

@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Http;
+namespace Gria\Http\Request;
 
 interface RequestInterface
 {

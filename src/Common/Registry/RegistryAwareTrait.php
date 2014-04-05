@@ -8,11 +8,6 @@
 
 namespace Gria\Common\Registry;
 
-/**
- * Defines the API for classes that are aware of instances of the {@link \Gria\Common\RegistryInterface} interface.
- *
- * @package Gria\Common\Registry
- */
 trait RegistryAwareTrait
 {
 

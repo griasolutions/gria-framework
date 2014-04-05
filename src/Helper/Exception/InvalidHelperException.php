@@ -6,10 +6,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Helper;
+namespace Gria\Helper\Exception;
 
 use \Gria\Common;
 
-class InvalidHelperException extends Common\Exception
+class InvalidHelperException extends Common\Exception\Exception
 {
 } 

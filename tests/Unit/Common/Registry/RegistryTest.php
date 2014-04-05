@@ -10,40 +10,27 @@ namespace GriaTest\Unit\Common;
 
 use \Gria\Common;
 
-/**
- * Tests {@link \Gria\Common\Registry}.
- *
- * @package GriaTest\Unit\Common
- */
 class RegistryTest extends \PHPUnit_Framework_TestCase
 {
 
-    /** @var \Gria\Common\RegistryInterface */
-    private $_registry;
+    /** @var \Gria\Common\Registry\RegistryInterface */
+    private $registry;
 
     /** @var array */
-    private $_expectedRegistryData;
+    private $expectedRegistryData;
 
-    /**
-     * @inheritdoc
-     */
     public function setUp()
     {
         $person = new \stdClass();
         $person->name = 'Guillermo Fisher';
         $person->age = '999';
-        $this->_expectedRegistryData = array(
+        $this->expectedRegistryData = array(
             'person' => $person,
             'state' => 'confusion'
         );
-        $this->_registry = new Common\Registry($this->_expectedRegistryData);
+        $this->registry = new Common\Registry\Registry($this->expectedRegistryData);
     }
 
-    /**
-     * Tests RegistryInterface::offsetExists()
-     *
-     * @return void
-     */
     public function testOffsetExists()
     {
         $this->assertTrue($this->getRegistry()->offsetExists('person'));
@@ -51,11 +38,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(isset($this->getRegistry()['person']));
     }
 
-    /**
-     * Tests RegistryInterface::offsetSet()
-     *
-     * @return void
-     */
     public function testOffsetSet()
     {
         $this->getRegistry()->offsetSet('example', 'data');
@@ -64,22 +46,12 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bird', $this->getRegistry()->offsetGet('mocking'));
     }
 
-    /**
-     * Tests RegistryInterface::offsetGet()
-     *
-     * @return void
-     */
     public function testOffsetGet()
     {
         $this->assertEquals('confusion', $this->getRegistry()->offsetGet('state'));
         $this->assertEquals('confusion', $this->getRegistry()['state']);
     }
 
-    /**
-     * Tests RegistryInterface::offsetUnset()
-     *
-     * @return void
-     */
     public function testOffsetUnset()
     {
         $this->getRegistry()->offsetSet('junk', 'data');
@@ -93,11 +65,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Returns the registry.
      *
-     * @return \Gria\Common\Registry
+     * @return \Gria\Common\Registry\RegistryInterface
      */
     public function getRegistry()
     {
-        return $this->_registry;
+        return $this->registry;
     }
 
     /**
@@ -107,7 +79,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function getExpectedRegistryData()
     {
-        return $this->_expectedRegistryData;
+        return $this->expectedRegistryData;
     }
 
 }

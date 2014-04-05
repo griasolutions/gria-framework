@@ -8,11 +8,6 @@
 
 namespace Gria\Common\Exception;
 
-/**
- * Exception interface.
- *
- * @package Gria\Common\Exception
- */
 interface ExceptionInterface
 {
 

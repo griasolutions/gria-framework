@@ -6,27 +6,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Http;
+namespace Gria\Http\Request;
 
 trait RequestAwareTrait
 {
 
-    /** @var \Gria\Http\RequestInterface */
+    /** @var \Gria\Http\Request\RequestInterface */
     private $_request;
 
     /**
-     * @param \Gria\Http\RequestInterface $request
+     * @param \Gria\Http\Request\RequestInterface $request
      * @return $this
      */
     public function setRequest(RequestInterface $request)
     {
         $this->_request = $request;
-
         return $this;
     }
 
     /**
-     * @return \Gria\Http\RequestInterface
+     * @return \Gria\Http\Request\RequestInterface
      */
     public function getRequest()
     {

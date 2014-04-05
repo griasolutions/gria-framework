@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Http;
+namespace Gria\Http\Response;
 
 class Response implements ResponseInterface
 {

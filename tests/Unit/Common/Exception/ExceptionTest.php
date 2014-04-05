@@ -10,38 +10,23 @@ namespace GriaTest\Unit\Common;
 
 use \Gria\Common;
 
-/**
- * Tests the base Exception class.
- *
- * @package GriaTest\Unit\Common
- */
 class ExceptionTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * Tests that the correct code is returned.
-     *
-     * @return void
-     */
     public function testCode()
     {
         try {
-            throw new Common\Exception('Test');
-        } catch (Common\Exception $ex) {
+            throw new Common\Exception\Exception('Test');
+        } catch (Common\Exception\Exception $ex) {
             $this->assertEquals(500, $ex->getCode());
         }
     }
 
-    /**
-     * Tests that the correct message is returned.
-     *
-     * @return void
-     */
     public function testMessage()
     {
         try {
-            throw new Common\Exception('Test');
-        } catch (Common\Exception $ex) {
+            throw new Common\Exception\Exception('Test');
+        } catch (Common\Exception\Exception $ex) {
             $this->assertEquals('Test', $ex->getMessage());
         }
     }

@@ -6,14 +6,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Gria\Config;
+namespace Gria\Config\Exception;
 
 use \Gria\Common;
 
 /**
- * Exception thrown when an invalid {@link \Gria\Config\ConfigInterface} object is encountered.
- *
- * @package Gria\Common
+ * Exception thrown when an invalid {@link \Gria\Config\ConfigInterface} object
+ * is encountered.
  */
 class InvalidConfigException extends Common\Exception\Exception
 {

@@ -10,7 +10,7 @@ namespace Gria\Helper;
 
 use \Gria\Common;
 
-class Registry extends Common\Registry
+class Registry extends Common\Registry\Registry
 {
 
     /**

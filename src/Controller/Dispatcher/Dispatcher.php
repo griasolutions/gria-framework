@@ -21,14 +21,14 @@ use \Gria\Helper;
 class Dispatcher implements DispatcherInterface
 {
 
-    use Config\ConfigAwareTrait, Http\RequestAwareTrait, Helper\HelperManagerAwareTrait;
+    use Config\ConfigAwareTrait, Http\Request\RequestAwareTrait, Helper\Manager\HelperManagerAwareTrait;
 
     /**
      * @param \Gria\Config\ConfigInterface $config
-     * @param \Gria\Controller\Request $request
-     * @param \Gria\Helper\Manager $helperManager
+     * @param \Gria\Controller\Request\RequestInterface $request
+     * @param \Gria\Helper\Manager\ManagerInterface $helperManager
      */
-    public function __construct(Config\ConfigInterface $config, Controller\Request $request, Helper\Manager $helperManager)
+    public function __construct(Config\ConfigInterface $config, Controller\Request\RequestInterface $request, Helper\Manager\ManagerInterface $helperManager)
     {
         $this->setConfig($config);
         $this->setRequest($request);

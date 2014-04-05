@@ -1,22 +1,18 @@
 <?php
 
-namespace GriaTest\Integration\Config;
+namespace GriaTest\Unit\Config;
 
 use \Gria\Config;
+use \Gria\Test;
 
-/**
- * Tests {@link \Gria\Config\Config}.
- *
- * @package GriaTest\Integration\Config
- */
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends Test\UnitTest
 {
 
-    /** @var \Gria\Config\Config */
-    private $_config;
+    /** @var \Gria\Config\ConfigInterface */
+    private $config;
 
     /** @var array */
-    private $_fixtureData = array(
+    private $fixtureData = array(
         'test' => array(
             'application' => 'Application',
             'answer' => 42,
@@ -24,36 +20,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         )
     );
 
-    /**
-     * @inheritdoc
-     */
-    public function setUp()
-    {
-        $this->_config = $this->getMock('\Gria\Config\Config', array('getRawData'));
-        $this->_config->expects($this->any())
-            ->method('getRawData')
-            ->will($this->returnValue($this->getFixtureData()));
-    }
-
-    /**
-     * Tests {@link \Gria\Config\Config::get()}.
-     *
-     * @return void
-     */
     public function testGetValues()
     {
-        $errorMessageFormat = 'Cannot read %s from the config!';
         $config = $this->getConfig();
-        $this->assertEquals('Application', $config->get('application'), sprintf($errorMessageFormat, 'strings'));
-        $this->assertEquals(42, $config->get('answer'), sprintf($errorMessageFormat, 'integers'));
-        $this->assertEquals(true, $config->get('isTest'), sprintf($errorMessageFormat, 'booleans'));
+        $this->assertEquals('Application', $config->get('application'));
+        $this->assertEquals(42, $config->get('answer'));
+        $this->assertEquals(true, $config->get('isTest'));
     }
 
-    /**
-     * Tests {@link \Gria\Config\Config::getPath()}.
-     *
-     * @return void
-     */
     public function testGetPath()
     {
         $config = $this->getConfig();
@@ -63,13 +37,21 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns an instance of {@link \Gria\Config\Config}.
+     * Returns an instance of {@link \Gria\Config\ConfigInterface}.
      *
-     * @return \Gria\Config\Config
+     * @return \Gria\Config\ConfigInterface
      */
     public function getConfig()
     {
-        return $this->_config;
+        if (!$this->config) {
+            $this->config = $this->getMock('\Gria\Config\Config',
+                array('getRawData'),
+                array('example.ini', $this->getMockEnvironment()));
+            $this->config->expects($this->any())
+                ->method('getRawData')
+                ->will($this->returnValue($this->getFixtureData()));
+        }
+        return $this->config;
     }
 
     /**
@@ -79,7 +61,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function getFixtureData()
     {
-        return $this->_fixtureData;
+        return $this->fixtureData;
     }
 
 } 
